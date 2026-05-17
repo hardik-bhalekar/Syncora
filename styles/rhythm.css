@@ -1,0 +1,54 @@
+/**
+ * SYNCORA SPACING & RHYTHM UTILITIES
+ * ----------------------------------
+ * Enforcing the Editorial Fibonacci Spacing Scale (4px to 180px)
+ * for intentional pacing, dramatic rhythm, and operational density.
+ */
+
+/* Vertical Pacing Ladders */
+
+.py-rhythm-1 { padding-top: var(--space-1); padding-bottom: var(--space-1); }
+.py-rhythm-2 { padding-top: var(--space-2); padding-bottom: var(--space-2); }
+.py-rhythm-3 { padding-top: var(--space-3); padding-bottom: var(--space-3); }
+.py-rhythm-4 { padding-top: var(--space-4); padding-bottom: var(--space-4); }
+.py-rhythm-5 { padding-top: var(--space-5); padding-bottom: var(--space-5); }
+.py-rhythm-6 { padding-top: var(--space-6); padding-bottom: var(--space-6); }
+.py-rhythm-7 { padding-top: var(--space-7); padding-bottom: var(--space-7); }
+.py-rhythm-8 { padding-top: var(--space-8); padding-bottom: var(--space-8); }
+
+.my-rhythm-1 { margin-top: var(--space-1); margin-bottom: var(--space-1); }
+.my-rhythm-2 { margin-top: var(--space-2); margin-bottom: var(--space-2); }
+.my-rhythm-3 { margin-top: var(--space-3); margin-bottom: var(--space-3); }
+.my-rhythm-4 { margin-top: var(--space-4); margin-bottom: var(--space-4); }
+.my-rhythm-5 { margin-top: var(--space-5); margin-bottom: var(--space-5); }
+.my-rhythm-6 { margin-top: var(--space-6); margin-bottom: var(--space-6); }
+.my-rhythm-7 { margin-top: var(--space-7); margin-bottom: var(--space-7); }
+.my-rhythm-8 { margin-top: var(--space-8); margin-bottom: var(--space-8); }
+
+/* Gap Utilities for Grids and Flex */
+
+.gap-rhythm-1 { gap: var(--space-1); }
+.gap-rhythm-2 { gap: var(--space-2); }
+.gap-rhythm-3 { gap: var(--space-3); }
+.gap-rhythm-4 { gap: var(--space-4); }
+.gap-rhythm-5 { gap: var(--space-5); }
+.gap-rhythm-6 { gap: var(--space-6); }
+
+/* Section Pacing Acts */
+
+.section-act-marketing {
+  padding-top: var(--space-7);
+  padding-bottom: var(--space-7);
+}
+
+@media (min-width: 1024px) {
+  .section-act-marketing {
+    padding-top: var(--space-8);
+    padding-bottom: var(--space-8);
+  }
+}
+
+.section-act-dashboard {
+  padding-top: var(--space-5);
+  padding-bottom: var(--space-5);
+}

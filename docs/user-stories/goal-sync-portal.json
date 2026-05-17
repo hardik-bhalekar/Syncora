@@ -1,0 +1,31 @@
+[
+  {
+    "description": "User authenticates into the portal",
+    "steps": [
+      "Navigate to /login page",
+      "Verify Spline 3D Auth scene renders correctly without errors",
+      "Enter credentials and submit",
+      "Verify successful redirection to dashboard shell"
+    ],
+    "passes": true
+  },
+  {
+    "description": "User views cinematic dashboard and manages goals",
+    "steps": [
+      "Navigate to dashboard",
+      "Verify graphite editorial design system and typography hierarchy",
+      "Interact with goal tracking telemetry components",
+      "Verify smooth spring-based motion transitions"
+    ],
+    "passes": true
+  },
+  {
+    "description": "User logs out of the portal",
+    "steps": [
+      "Click logout button in dashboard shell",
+      "Verify session termination",
+      "Verify redirection back to login or landing page"
+    ],
+    "passes": true
+  }
+]

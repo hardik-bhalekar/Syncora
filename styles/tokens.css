@@ -1,0 +1,119 @@
+/**
+ * SYNCORA DESIGN TOKEN ARCHITECTURE (UI/UX PRO MAX)
+ * -------------------------------------------------
+ * Foundational token system establishing precise graphite/emerald
+ * palettes, editorial spacing ladders, elevation shadows, and touch targets.
+ */
+
+:root {
+  /* --- 1. FOUNDATIONAL COLOR PALETTES (UI/UX PRO MAX) --- */
+  
+  /* Light Mode Architecture */
+  --color-light-bg: #FBFBFB;
+  --color-light-surface: #FFFFFF;
+  --color-light-elevated: #F4F4F5;
+  --color-light-subtle: #E4E4E7;
+  --color-light-text-main: #18181B; /* Deep slate/charcoal */
+  --color-light-text-muted: #71717A;
+  --color-light-text-dimmed: #A1A1AA;
+  --color-light-border: rgba(0, 0, 0, 0.08);
+
+  /* Dark Mode Architecture (Cinematic Graphite) */
+  --color-dark-bg: #0A0A0C;
+  --color-dark-surface: #121215;
+  --color-dark-elevated: #1A1A1E;
+  --color-dark-subtle: #222227;
+  --color-dark-text-main: #FFFFFF;
+  --color-dark-text-muted: #A1A1AA;
+  --color-dark-text-dimmed: #71717A;
+  --color-dark-border: rgba(255, 255, 255, 0.08);
+  --color-dark-border-strong: rgba(255, 255, 255, 0.16);
+
+  /* Intentional Signal Tones */
+  --color-signal-emerald: #10B981; /* Restrained Jade/Emerald */
+  --color-signal-emerald-subtle: rgba(16, 185, 129, 0.15);
+  --color-signal-crimson: #EF4444;
+  --color-signal-cerulean: #0284C7;
+  --color-signal-ochre: #F59E0B;
+  --color-signal-indigo: #6366F1;
+
+  /* --- 2. EDITORIAL FIBONACCI SPACING LADDER --- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 40px;
+  --space-6: 64px;
+  --space-7: 112px;
+  --space-8: 180px;
+
+  /* --- 3. ELEVATION & ETHEREAL SHADOWS (21st.dev) --- */
+  --shadow-subtle-light: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-elevated-light: 0 4px 20px -2px rgba(0, 0, 0, 0.08);
+  
+  --shadow-subtle-dark: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
+  --shadow-ethereal-emerald: 0 4px 20px -2px rgba(16, 185, 129, 0.15);
+  --shadow-ethereal-indigo: 0 0 20px rgba(99, 102, 241, 0.1);
+
+  /* --- 4. MOTION ARCHITECTURE (Framer Motion Profiles) --- */
+  --ease-snappy: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-calm: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-heavy: cubic-bezier(0.25, 0.1, 0.25, 1);
+
+  --duration-quick: 200ms;
+  --duration-base: 400ms;
+  --duration-slow: 700ms;
+  --duration-epic: 1200ms;
+
+  /* --- 5. TOUCH TARGETS & ERGONOMICS (CRITICAL UX) --- */
+  --touch-target-min: 40px;
+
+  /* --- 6. FONT & LEGACY ALIASES --- */
+  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
+  --font-space-grotesk: var(--font-geist-sans), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
+
+  --color-graphite-base: var(--color-dark-bg);
+  --color-graphite-surface: var(--color-dark-surface);
+  --color-graphite-elevated: var(--color-dark-elevated);
+  --color-graphite-subtle: var(--color-dark-subtle);
+
+  --color-alabaster-stark: var(--color-dark-text-main);
+  --color-alabaster-base: var(--color-dark-text-main);
+  --color-alabaster-muted: var(--color-dark-text-muted);
+  --color-alabaster-dimmed: var(--color-dark-text-dimmed);
+
+  --color-parchment-base: #E2DFD8;
+  --color-parchment-subtle: #C9C6BF;
+
+  --hairline-base: var(--color-dark-border);
+  --hairline-strong: var(--color-dark-border-strong);
+}
+
+/* Theme Mappings (Defaulting to Dark Mode Cinematic Graphite as base) */
+:root {
+  --color-bg: var(--color-dark-bg);
+  --color-surface: var(--color-dark-surface);
+  --color-elevated: var(--color-dark-elevated);
+  --color-subtle: var(--color-dark-subtle);
+  --color-text-main: var(--color-dark-text-main);
+  --color-text-muted: var(--color-dark-text-muted);
+  --color-text-dimmed: var(--color-dark-text-dimmed);
+  --color-border: var(--color-dark-border);
+  --color-border-strong: var(--color-dark-border-strong);
+  --shadow-subtle: var(--shadow-subtle-dark);
+}
+
+/* Light Theme Override */
+[data-theme='light'] {
+  --color-bg: var(--color-light-bg);
+  --color-surface: var(--color-light-surface);
+  --color-elevated: var(--color-light-elevated);
+  --color-subtle: var(--color-light-subtle);
+  --color-text-main: var(--color-light-text-main);
+  --color-text-muted: var(--color-light-text-muted);
+  --color-text-dimmed: var(--color-light-text-dimmed);
+  --color-border: var(--color-light-border);
+  --color-border-strong: rgba(0, 0, 0, 0.16);
+  --shadow-subtle: var(--shadow-subtle-light);
+}

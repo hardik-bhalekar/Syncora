@@ -1,0 +1,90 @@
+/**
+ * SYNCORA CENTRALIZED TYPOGRAPHY SYSTEM
+ * -------------------------------------
+ * Integrating Geist Sans, Geist Mono, and Newsreader Serif into a
+ * strict, high-contrast editorial hierarchy scale.
+ */
+
+/* Hierarchy Scale Utilities */
+
+.text-display-2xl {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: clamp(3rem, 6vw, 4.5rem); /* 72px max */
+  line-height: 1.05;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--color-text-main);
+}
+
+.text-display-xl {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: clamp(2.25rem, 5vw, 3.75rem); /* 60px max */
+  line-height: 1.08;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--color-text-main);
+}
+
+.text-heading-l {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: clamp(1.75rem, 3vw, 2.25rem); /* 36px max */
+  line-height: 1.12;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--color-text-main);
+}
+
+.text-body-m {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 1rem; /* 16px */
+  line-height: 1.5;
+  font-weight: 400;
+  letter-spacing: normal;
+  color: var(--color-text-muted);
+}
+
+.text-caption-s {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 0.8125rem; /* 13px */
+  line-height: 1.38;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--color-text-dimmed);
+}
+
+/* Expressive Marketing Utilities */
+
+.editorial-serif-headline {
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  font-weight: 400;
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  color: var(--color-text-main);
+}
+
+.editorial-serif-italic {
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--color-signal-emerald);
+}
+
+/* Operational Dashboard Utilities */
+
+.telemetry-label {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--color-text-dimmed);
+}
+
+.telemetry-value-mono {
+  font-family: var(--font-mono), monospace;
+  font-size: clamp(1.5rem, 2.5vw, 2.5rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--color-text-main);
+}
