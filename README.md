@@ -11,6 +11,20 @@ npm run dev
 
 Open http://localhost:3000.
 
+## Environment
+
+Create a local env file before running the app:
+
+```bash
+cp .env.example .env.local
+```
+
+Required variables:
+
+- `DATABASE_URL` - Postgres connection string for Prisma.
+- `NEXTAUTH_SECRET` - auth secret.
+- `NEXTAUTH_URL` - base URL for NextAuth.
+
 ## Scripts
 
 - `npm run dev` - start dev server
