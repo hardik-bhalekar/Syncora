@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useCallback, useState, useEffect } from "react"
 import { Terminal, Bell, Mail, MessageSquare, CheckCircle2, AlertCircle, RefreshCw, Trash2, Maximize2, Minimize2, ExternalLink } from "lucide-react"
 
 type WorkflowLog = {
@@ -19,7 +19,7 @@ export function WorkflowInspector() {
   const [loading, setLoading] = useState(false)
   const [selectedLog, setSelectedLog] = useState<WorkflowLog | null>(null)
 
-  const fetchLogs = async () => {
+  const fetchLogs = useCallback(async () => {
     setLoading(true)
     try {
       const res = await fetch("/api/telemetry/workflows")
@@ -30,7 +30,7 @@ export function WorkflowInspector() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [])
 
   const clearLogs = async () => {
     try {
@@ -43,10 +43,13 @@ export function WorkflowInspector() {
   }
 
   useEffect(() => {
-    fetchLogs()
+    const timeout = setTimeout(fetchLogs, 0)
     const interval = setInterval(fetchLogs, 5000)
-    return () => clearInterval(interval)
-  }, [])
+    return () => {
+      clearTimeout(timeout)
+      clearInterval(interval)
+    }
+  }, [fetchLogs])
 
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end pointer-events-none">
