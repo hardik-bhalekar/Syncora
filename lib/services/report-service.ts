@@ -1,4 +1,4 @@
-import type { Role } from "@prisma/client"
+import type { Role } from "@/prisma/generated/client"
 import { prisma } from "@/lib/prisma"
 import { resolveActorContext } from "@/lib/services/tenant-context"
 

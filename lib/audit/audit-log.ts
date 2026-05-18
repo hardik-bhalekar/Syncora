@@ -1,4 +1,4 @@
-import type { AuditAction, Prisma, PrismaClient } from "@prisma/client"
+import type { AuditAction, Prisma, PrismaClient } from "@/prisma/generated/client"
 import { prisma } from "@/lib/prisma"
 
 type AuditClient = PrismaClient | Prisma.TransactionClient

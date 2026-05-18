@@ -1,4 +1,4 @@
-import type { Role } from "@prisma/client"
+import type { Role } from "@/prisma/generated/client"
 import { getServerAuthSession } from "@/lib/auth"
 
 export class HttpError extends Error {

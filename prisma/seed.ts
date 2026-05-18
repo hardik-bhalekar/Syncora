@@ -1,4 +1,5 @@
-import { PrismaClient, Role } from "@prisma/client"
+import "dotenv/config"
+import { PrismaClient, Role } from "./generated/client"
 import bcrypt from "bcryptjs"
 
 const prisma = new PrismaClient()
@@ -16,8 +17,10 @@ async function main() {
   })
 
   // Admin
-  await prisma.user.create({
-    data: {
+  await prisma.user.upsert({
+    where: { email: "admin@test.com" },
+    update: { password, role: Role.ADMIN, tenantId: organization.id },
+    create: {
       name: "Admin User",
       email: "admin@test.com",
       password,
@@ -26,9 +29,24 @@ async function main() {
     },
   })
 
+  // Labop69 Admin (User's primary demo account)
+  await prisma.user.upsert({
+    where: { email: "labop69@gmail.com" },
+    update: { password, role: Role.ADMIN, tenantId: organization.id },
+    create: {
+      name: "Hardik (Admin)",
+      email: "labop69@gmail.com",
+      password,
+      role: Role.ADMIN,
+      tenant: { connect: { id: organization.id } },
+    },
+  })
+
   // Manager
-  const manager = await prisma.user.create({
-    data: {
+  const manager = await prisma.user.upsert({
+    where: { email: "manager@test.com" },
+    update: { password, role: Role.MANAGER, tenantId: organization.id },
+    create: {
       name: "Manager User",
       email: "manager@test.com",
       password,
@@ -38,14 +56,29 @@ async function main() {
   })
 
   // Employee
-  await prisma.user.create({
-    data: {
+  await prisma.user.upsert({
+    where: { email: "employee@test.com" },
+    update: { password, role: Role.EMPLOYEE, tenantId: organization.id, managerId: manager.id },
+    create: {
       name: "Employee User",
       email: "employee@test.com",
       password,
       role: Role.EMPLOYEE,
       tenant: { connect: { id: organization.id } },
       manager: { connect: { id: manager.id } },
+    },
+  })
+
+  // Super Admin
+  await prisma.user.upsert({
+    where: { email: "superadmin@test.com" },
+    update: { password, role: Role.SUPER_ADMIN, tenantId: organization.id },
+    create: {
+      name: "Super Admin User",
+      email: "superadmin@test.com",
+      password,
+      role: Role.SUPER_ADMIN,
+      tenant: { connect: { id: organization.id } },
     },
   })
 

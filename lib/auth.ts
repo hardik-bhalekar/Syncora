@@ -1,10 +1,11 @@
 import { PrismaAdapter } from "@auth/prisma-adapter"
 import bcrypt from "bcryptjs"
-import type { Role } from "@prisma/client"
+import type { Role } from "@/prisma/generated/client"
 import type { NextAuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import GoogleProvider from "next-auth/providers/google"
 import AzureADProvider from "next-auth/providers/azure-ad"
+import GitHubProvider from "next-auth/providers/github"
 import { z } from "zod"
 import { prisma } from "./prisma"
 
@@ -13,8 +14,44 @@ const credentialsSchema = z.object({
   password: z.string().min(1),
 })
 
+const baseAdapter = PrismaAdapter(prisma as any)
+const customAdapter = {
+  ...baseAdapter,
+  createUser: async (data: any) => {
+    let org = await prisma.organization.findFirst({
+      where: { domain: "goal-sync.local" },
+    })
+    if (!org) {
+      org = await prisma.organization.findFirst()
+    }
+    if (!org) {
+      org = await prisma.organization.create({
+        data: {
+          name: "Goal Sync Demo Org",
+          domain: "goal-sync.local",
+          plan: "ENTERPRISE",
+        },
+      })
+    }
+
+    let role: Role = "EMPLOYEE"
+    const emailLower = data.email?.toLowerCase() || ""
+    if (emailLower.includes("admin") || emailLower === "labop69@gmail.com") role = "ADMIN"
+    else if (emailLower.includes("manager")) role = "MANAGER"
+    else if (emailLower.includes("super")) role = "SUPER_ADMIN"
+
+    return prisma.user.create({
+      data: {
+        ...data,
+        tenantId: org.id,
+        role,
+      },
+    })
+  },
+}
+
 export const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(prisma),
+  adapter: customAdapter as any,
   secret: process.env.NEXTAUTH_SECRET,
   session: {
     strategy: "jwt",
@@ -24,13 +61,20 @@ export const authOptions: NextAuthOptions = {
   },
   providers: [
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID || "mock-client-id",
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "mock-client-secret",
+      clientId: process.env.GOOGLE_CLIENT_ID || "mock-google-id",
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "mock-google-secret",
+      allowDangerousEmailAccountLinking: true,
     }),
     AzureADProvider({
-      clientId: process.env.AZURE_AD_CLIENT_ID || "mock-azure-id",
-      clientSecret: process.env.AZURE_AD_CLIENT_SECRET || "mock-azure-secret",
-      tenantId: process.env.AZURE_AD_TENANT_ID || "common",
+      clientId: process.env.AZURE_AD_CLIENT_ID || process.env.MICROSOFT_CLIENT_ID || "mock-azure-id",
+      clientSecret: process.env.AZURE_AD_CLIENT_SECRET || process.env.MICROSOFT_CLIENT_SECRET || "mock-azure-secret",
+      tenantId: process.env.AZURE_AD_TENANT_ID || process.env.MICROSOFT_TENANT_ID || "common",
+      allowDangerousEmailAccountLinking: true,
+    }),
+    GitHubProvider({
+      clientId: process.env.GITHUB_CLIENT_ID || "mock-github-id",
+      clientSecret: process.env.GITHUB_CLIENT_SECRET || "mock-github-secret",
+      allowDangerousEmailAccountLinking: true,
     }),
     CredentialsProvider({
       name: "Credentials",

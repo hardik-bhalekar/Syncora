@@ -1,4 +1,4 @@
-import type { Quarter, Role } from "@prisma/client"
+import type { Quarter, Role } from "@/prisma/generated/client"
 import { createAuditLog } from "@/lib/audit/audit-log"
 import { calculateProgressPercentage, progressStatus } from "@/lib/calculations/progress"
 import { prisma } from "@/lib/prisma"

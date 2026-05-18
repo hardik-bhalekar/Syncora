@@ -1,7 +1,7 @@
 import { prisma, withTenant } from "../../prisma";
 import { eventBus } from "../event/event-bus";
 import { saveGoalSheetSchema, validateWeightage } from "@/lib/validators/goals";
-import type { Role } from "@prisma/client";
+import type { Role } from "@/prisma/generated/client";
 
 type Actor = {
   id: string;

@@ -1,4 +1,5 @@
-import type { EscalationLevel, EscalationStatus, EscalationType, Prisma, PrismaClient } from "@prisma/client"
+import type { EscalationLevel, EscalationStatus, EscalationType, Prisma, PrismaClient } from "@/prisma/generated/client"
+import { triggerEscalationWorkflow } from "@/lib/services/workflow-service"
 
 type DbClient = PrismaClient | Prisma.TransactionClient
 
@@ -14,7 +15,7 @@ type EscalationInput = {
 }
 
 export async function createEscalation(client: DbClient, input: EscalationInput) {
-  return client.escalation.create({
+  const escalation = await client.escalation.create({
     data: {
       tenantId: input.tenantId,
       employeeId: input.employeeId,
@@ -27,6 +28,10 @@ export async function createEscalation(client: DbClient, input: EscalationInput)
       status: "ACTIVE",
     },
   })
+
+  triggerEscalationWorkflow(escalation.id).catch((e) => console.error("[Workflow Error]", e))
+
+  return escalation
 }
 
 export async function resolveEscalation(client: DbClient, tenantId: string, escalationId: string, status: EscalationStatus = "RESOLVED") {

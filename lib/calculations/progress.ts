@@ -1,4 +1,4 @@
-import type { MetricDirection, ProgressStatus } from "@prisma/client"
+import type { MetricDirection, ProgressStatus } from "@/prisma/generated/client"
 
 type ProgressInput = {
   direction: MetricDirection

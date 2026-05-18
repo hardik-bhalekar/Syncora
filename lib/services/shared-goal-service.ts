@@ -1,4 +1,4 @@
-import type { Role } from "@prisma/client"
+import type { Role } from "@/prisma/generated/client"
 import { createAuditLog } from "@/lib/audit/audit-log"
 import { prisma } from "@/lib/prisma"
 import { createNotification } from "@/lib/services/notification-service"

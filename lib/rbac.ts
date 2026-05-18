@@ -1,4 +1,4 @@
-import type { Role } from "@prisma/client"
+import type { Role } from "@/prisma/generated/client"
 
 export type DashboardNavItem = {
   href: string
@@ -7,6 +7,7 @@ export type DashboardNavItem = {
 
 export function getDashboardHomePath(role?: Role | null) {
   switch (role) {
+    case "SUPER_ADMIN":
     case "ADMIN":
       return "/dashboard/admin"
     case "MANAGER":
@@ -19,7 +20,7 @@ export function getDashboardHomePath(role?: Role | null) {
 }
 
 export function getDashboardNavItems(role?: Role | null): DashboardNavItem[] {
-  if (role === "ADMIN") {
+  if (role === "SUPER_ADMIN" || role === "ADMIN") {
     return [
       { href: "/dashboard/admin", label: "Admin" },
       { href: "/dashboard/manager", label: "Manager" },
@@ -43,7 +44,7 @@ export function getDashboardNavItems(role?: Role | null): DashboardNavItem[] {
 }
 
 export function canAccessDashboard(role: Role | null | undefined, pathname: string) {
-  if (role === "ADMIN") {
+  if (role === "SUPER_ADMIN" || role === "ADMIN") {
     return true
   }
 

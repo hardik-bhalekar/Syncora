@@ -14,6 +14,7 @@ import { getDashboardNavItems } from "@/lib/rbac";
 import { PageTransition } from "@/components/motion/page-transition";
 import { DashboardSignOut } from "@/components/dashboard/dashboard-sign-out";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { WorkflowInspector } from "@/components/dashboard/workflow-inspector";
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   const session = await getServerAuthSession();
@@ -25,7 +26,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
   const navItems = getDashboardNavItems(session.user.role);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[var(--color-bg)] text-[var(--color-text-main)] font-sans select-none overflow-x-hidden">
+    <div className="min-h-screen flex flex-col bg-[var(--color-bg)] text-[var(--color-text-main)] font-sans select-none overflow-x-hidden relative">
       {/* --- OPERATIONAL PRECISION TOP NAVIGATION --- */}
       <header className="sticky top-0 z-50 border-b border-[var(--color-border-strong)] bg-[var(--color-surface)]/80 backdrop-blur-2xl px-8 md:px-16 h-16 flex items-center justify-between transition-colors">
         <div className="flex items-center gap-10">
@@ -89,6 +90,9 @@ export default async function DashboardLayout({ children }: { children: React.Re
       <main className="flex-1 flex flex-col p-8 md:p-16 max-w-[1600px] w-full mx-auto">
         <PageTransition>{children}</PageTransition>
       </main>
+
+      {/* --- WORKFLOW TELEMETRY INSPECTOR --- */}
+      <WorkflowInspector />
     </div>
   );
 }

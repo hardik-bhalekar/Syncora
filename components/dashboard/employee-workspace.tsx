@@ -95,7 +95,7 @@ export function EmployeeWorkspace({
         uomType: "PERCENTAGE",
         metricDirection: "HIGHER_IS_BETTER",
         targetValue: 100,
-        deadlineAt: activeCycle?.endDate?.slice(0, 10) || null,
+        deadlineAt: activeCycle?.endDate ? new Date(activeCycle.endDate).toISOString().slice(0, 10) : null,
         weightage: 10,
       },
     ]);

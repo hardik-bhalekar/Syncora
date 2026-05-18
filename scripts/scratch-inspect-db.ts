@@ -1,4 +1,5 @@
-import { PrismaClient } from "@prisma/client";
+import "dotenv/config";
+import { PrismaClient } from "../prisma/generated/client";
 
 const prisma = new PrismaClient();
 
@@ -39,7 +40,17 @@ async function main() {
   });
 
   const sharedGoals = await prisma.sharedGoal.findMany({
-    include: {
+    select: {
+      id: true,
+      tenantId: true,
+      ownerId: true,
+      title: true,
+      description: true,
+      targetValue: true,
+      thrustArea: true,
+      syncEnabled: true,
+      createdAt: true,
+      updatedAt: true,
       assignments: true,
     }
   });

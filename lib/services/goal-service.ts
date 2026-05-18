@@ -1,8 +1,9 @@
-import type { GoalSheetStatus, Role } from "@prisma/client"
+import type { GoalSheetStatus, Role } from "@/prisma/generated/client"
 import { createAuditLog } from "@/lib/audit/audit-log"
 import { prisma } from "@/lib/prisma"
 import { createNotification } from "@/lib/services/notification-service"
 import { resolveActorContext } from "@/lib/services/tenant-context"
+import { triggerGoalSubmittedWorkflow, triggerGoalReviewedWorkflow } from "@/lib/services/workflow-service"
 import { saveGoalSheetSchema, validateTimelineRules, validateWeightage } from "@/lib/validators/goals"
 
 type Actor = {
@@ -166,7 +167,7 @@ export async function submitGoalSheet(actor: Actor, goalSheetId: string) {
     throw new Error("Only employees can submit their own goal sheets.")
   }
 
-  return prisma.$transaction(async (tx) => {
+  const result = await prisma.$transaction(async (tx) => {
     const goalSheet = await tx.goalSheet.findUnique({
       where: { id: goalSheetId },
       include: {
@@ -229,6 +230,9 @@ export async function submitGoalSheet(actor: Actor, goalSheetId: string) {
 
     return updated
   })
+
+  await triggerGoalSubmittedWorkflow(result.id).catch((e) => console.error("[Workflow Error]", e))
+  return result
 }
 
 export async function reviewGoalSheet(
@@ -243,7 +247,7 @@ export async function reviewGoalSheet(
     throw new Error("Only managers and admins can review goals.")
   }
 
-  return prisma.$transaction(async (tx) => {
+  const result = await prisma.$transaction(async (tx) => {
     const goalSheet = await tx.goalSheet.findUnique({
       where: { id: goalSheetId },
       include: { employee: true, currentCycle: true, goals: true },
@@ -324,6 +328,9 @@ export async function reviewGoalSheet(
 
     return updated
   })
+
+  await triggerGoalReviewedWorkflow(result.id, status).catch((e) => console.error("[Workflow Error]", e))
+  return result
 }
 
 export async function unlockGoalSheet(actor: Actor, goalSheetId: string, reason: string) {
