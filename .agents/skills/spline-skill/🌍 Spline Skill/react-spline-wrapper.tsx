@@ -60,11 +60,13 @@ export default function SplineBackground({
       }
     }, 8000);
 
-    return () => clearTimeout(timeoutRef.current);
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
   }, [canLoad, splineLoaded]);
 
   function onLoad() {
-    clearTimeout(timeoutRef.current);
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
     setSplineLoaded(true);
   }
 
