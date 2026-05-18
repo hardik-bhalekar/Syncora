@@ -12,7 +12,7 @@ import type { Application } from '@splinetool/runtime';
 const SCENE_URL = 'https://prod.spline.design/REPLACE_ME/scene.splinecode';
 
 export default function InteractiveScene() {
-  const splineApp = useRef<Application>();
+  const splineApp = useRef<Application | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [lastEvent, setLastEvent] = useState<string>('');
 
@@ -98,7 +98,7 @@ export default function InteractiveScene() {
         scene={SCENE_URL}
         onLoad={onLoad}
         onMouseDown={onMouseDown}
-        onMouseHover={onMouseHover}
+        onMouseOver={onMouseHover}
         style={{
           position: 'absolute',
           inset: 0,
