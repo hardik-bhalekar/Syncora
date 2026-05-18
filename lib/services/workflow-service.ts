@@ -380,7 +380,7 @@ export async function triggerEscalationWorkflow(escalationId: string) {
   )
 
   // Send email to Manager and Admin
-  const recipients = [escalation.manager?.email, "admin@test.com"].filter(Boolean) as string[]
+  const recipients = [escalation.manager?.email, "admin@syncora.com"].filter(Boolean) as string[]
   for (const email of recipients) {
     const emailBody = `
       <h3 style="color: #cc0000;">🚨 Automated SLA Escalation Triggered</h3>

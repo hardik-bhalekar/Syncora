@@ -45,7 +45,7 @@ export default function LoginPage() {
 
   const quickFill = (demoEmail: string) => {
     setEmail(demoEmail)
-    setPassword("password123")
+    setPassword("Demo@123")
   }
 
   return (
@@ -143,21 +143,21 @@ export default function LoginPage() {
             </button>
             <button
               type="button"
-              onClick={() => quickFill("admin@test.com")}
+              onClick={() => quickFill("admin@syncora.com")}
               className="text-xs font-mono px-2.5 py-1 bg-[var(--color-graphite-elevated)] border border-[var(--hairline-strong)] hover:border-[var(--color-signal-cerulean)] text-[var(--color-alabaster-stark)] transition-colors cursor-pointer"
             >
               Admin
             </button>
             <button
               type="button"
-              onClick={() => quickFill("manager@test.com")}
+              onClick={() => quickFill("manager@syncora.com")}
               className="text-xs font-mono px-2.5 py-1 bg-[var(--color-graphite-elevated)] border border-[var(--hairline-strong)] hover:border-[var(--color-signal-cerulean)] text-[var(--color-alabaster-stark)] transition-colors cursor-pointer"
             >
               Manager
             </button>
             <button
               type="button"
-              onClick={() => quickFill("employee@test.com")}
+              onClick={() => quickFill("employee@syncora.com")}
               className="text-xs font-mono px-2.5 py-1 bg-[var(--color-graphite-elevated)] border border-[var(--hairline-strong)] hover:border-[var(--color-signal-cerulean)] text-[var(--color-alabaster-stark)] transition-colors cursor-pointer"
             >
               Employee
