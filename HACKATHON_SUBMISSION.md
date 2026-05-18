@@ -141,7 +141,7 @@ graph LR
 Syncora is fully deployed and ready for live judging. Explore the live environment using the pre-seeded enterprise credentials below.
 
 ### **🔗 Live Hackathon Links**
-* **Live Demo URL:** [https://syncora-nine.vercel.app/](https://syncora-nine.vercel.app/)
+* **Live Demo URL:** [https://syncora-3mmstahnc-hardikbhalekar10-6644s-projects.vercel.app/](https://syncora-3mmstahnc-hardikbhalekar10-6644s-projects.vercel.app/)
 * **GitHub Repository:** [https://github.com/hardik-bhalekar/Syncora](https://github.com/hardik-bhalekar/Syncora)
 * **Final Presentation PDF:** `final_submission_document.pdf` (Generated in project root)
 

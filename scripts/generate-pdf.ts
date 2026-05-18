@@ -271,7 +271,7 @@ async function generatePDF() {
   doc.roundedRect(50, credBoxY, 495, 155, 8).fillAndStroke(cardBg, cardStroke);
   
   doc.fillColor(primaryText).fontSize(11).font("Helvetica-Bold").text("Live Demo URL: ", 65, credBoxY + 18, { continued: true })
-     .fillColor(accentEmerald).font("Helvetica").text("https://syncora-nine.vercel.app/");
+     .fillColor(accentEmerald).font("Helvetica").text("https://syncora-3mmstahnc-hardikbhalekar10-6644s-projects.vercel.app/");
   
   doc.fillColor(primaryText).fontSize(11).font("Helvetica-Bold").text("GitHub Repository: ", 65, credBoxY + 38, { continued: true })
      .fillColor(accentCyan).font("Helvetica").text("https://github.com/hardik-bhalekar/Syncora");

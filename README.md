@@ -14,7 +14,7 @@
 
 | Resource | Direct Link / Details |
 | :--- | :--- |
-| **Hosted Live Demo URL** | [https://syncora-portal.vercel.app](https://syncora-portal.vercel.app) |
+| **Hosted Live Demo URL** | [https://syncora-3mmstahnc-hardikbhalekar10-6644s-projects.vercel.app/](https://syncora-3mmstahnc-hardikbhalekar10-6644s-projects.vercel.app/) |
 | **GitHub Repository** | [https://github.com/hardik-bhalekar/Syncora](https://github.com/hardik-bhalekar/Syncora) |
 | **Architecture Diagram** | Included below & exported as standalone artifact |
 | **Final Submission PDF** | Generated in project root (`final_submission_document.pdf`) |
