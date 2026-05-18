@@ -120,14 +120,14 @@ export default async function HomePage() {
                   </div>
                   <div className="hairline-rule-vertical h-10" />
                   <div>
-                    <div className="telemetry-label">CRYPTOGRAPHIC RBAC</div>
+                    <div className="telemetry-label">ZERO-TRUST RBAC</div>
                     <div className="font-mono text-base font-bold text-[var(--color-text-main)] mt-1">
                       {"4 ACTIVE REVIEW CYCLES"}
                     </div>
                   </div>
                   <div className="hairline-rule-vertical h-10 hidden sm:block" />
                   <div className="hidden sm:block">
-                    <div className="telemetry-label">AUTONOMOUS VERIFY</div>
+                    <div className="telemetry-label">REAL-TIME CDC</div>
                     <div className="font-mono text-base font-bold text-[var(--color-accent-primary)] mt-1">
                       {"1,248 CHECK-INS LOGGED"}
                     </div>
@@ -236,7 +236,7 @@ export default async function HomePage() {
                 </p>
               </div>
               <div className="mt-12 pt-8 border-t border-[var(--color-border-strong)]">
-                <span className="font-mono text-xs text-[var(--color-accent-primary)]">{"Secure SHA-256"}</span>
+                <span className="font-mono text-xs text-[var(--color-accent-primary)]">{"SERVER-SIDE VALIDATED"}</span>
               </div>
             </BentoCard>
 
@@ -252,7 +252,7 @@ export default async function HomePage() {
                 </p>
               </div>
               <div className="mt-12 pt-8 border-t border-[var(--color-border-strong)]">
-                <span className="font-mono text-xs text-[var(--color-accent-primary)]">VERIFY_PASS</span>
+                <span className="font-mono text-xs text-[var(--color-accent-primary)]">IMMUTABLE AUDIT LOGS</span>
               </div>
             </BentoCard>
 
@@ -268,7 +268,7 @@ export default async function HomePage() {
                 </p>
               </div>
               <div className="mt-12 pt-8 border-t border-[var(--color-border-strong)] flex items-center justify-between">
-                <span className="font-mono text-xs text-[var(--color-text-dimmed)]">LATENCY: &lt;12MS</span>
+                <span className="font-mono text-xs text-[var(--color-text-dimmed)]">REAL-TIME CDC SYNC</span>
                 <Link href="/dashboard/analytics" className="text-xs font-mono text-[var(--color-accent-primary)] hover:underline flex items-center gap-1">
                   INSPECT PERFORMANCE →
                 </Link>
@@ -400,33 +400,33 @@ export default async function HomePage() {
           <div className="max-w-3xl space-y-6">
             <div className="cinematic-kicker">
               <span className="signal-dot signal-dot-primary" />
-              {"Microservice Telemetry"}
+              {"Asynchronous Orchestration"}
             </div>
             <h2 className="text-cinematic-h1">
-              Decoupled Live <span className="text-cinematic-italic text-[var(--color-accent-primary)]">Interest Engine</span>.
+              Automated SLA <span className="text-cinematic-italic text-[var(--color-accent-primary)]">Escalation Engine</span>.
             </h2>
             <p className="text-editorial-body">
-              Engineered for fintech-grade resilience. Our live rate engine microservice provides strict DECIMAL precision guarantees, in-memory caching, and sub-12ms fallback calculation pipelines.
+              Engineered for enterprise-grade resilience. Our Inngest background workers monitor check-in progress thresholds (&lt;70%) and submission deadlines, triggering multi-level escalations (Manager, HR, Executive) with Circuit Breaker protected webhooks.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 font-mono">
             <div className="glass-panel p-8 space-y-4">
-              <div className="text-xs text-[var(--color-text-dimmed)]">LIVE_BANK_RATES</div>
-              <div className="text-4xl font-bold text-[var(--color-accent-primary)]">5.42%</div>
-              <div className="text-xs text-[var(--color-text-muted)] border-t border-[var(--color-border-strong)] pt-4">DECIMAL_PRECISION SCRAPER</div>
+              <div className="text-xs text-[var(--color-text-dimmed)]">SLA_COMPLIANCE</div>
+              <div className="text-4xl font-bold text-[var(--color-accent-primary)]">99.8%</div>
+              <div className="text-xs text-[var(--color-text-muted)] border-t border-[var(--color-border-strong)] pt-4">AUTOMATED ESCALATION MONITORING</div>
             </div>
 
             <div className="glass-panel p-8 space-y-4">
-              <div className="text-xs text-[var(--color-text-dimmed)]">CACHE_HIT_RATIO</div>
-              <div className="text-4xl font-bold text-[var(--color-accent-primary)]">99.1%</div>
-              <div className="text-xs text-[var(--color-text-muted)] border-t border-[var(--color-border-strong)] pt-4">IN_MEMORY_TTL: 300S</div>
+              <div className="text-xs text-[var(--color-text-dimmed)]">CIRCUIT_BREAKER</div>
+              <div className="text-4xl font-bold text-[var(--color-accent-primary)]">ACTIVE</div>
+              <div className="text-xs text-[var(--color-text-muted)] border-t border-[var(--color-border-strong)] pt-4">TEAMS ADAPTIVE CARDS v1.4</div>
             </div>
 
             <div className="glass-panel p-8 space-y-4">
-              <div className="text-xs text-[var(--color-text-dimmed)]">CALCULATION_LATENCY</div>
-              <div className="text-4xl font-bold text-[var(--color-accent-primary)]">8MS</div>
-              <div className="text-xs text-[var(--color-text-muted)] border-t border-[var(--color-border-strong)] pt-4">RESILIENT FALLBACK PIPELINE</div>
+              <div className="text-xs text-[var(--color-text-dimmed)]">REALTIME_CDC</div>
+              <div className="text-4xl font-bold text-[var(--color-accent-primary)]">&lt;15MS</div>
+              <div className="text-xs text-[var(--color-text-muted)] border-t border-[var(--color-border-strong)] pt-4">SUPABASE WEBSOCKET RECONCILIATION</div>
             </div>
           </div>
         </EditorialContainer>
@@ -584,8 +584,8 @@ export default async function HomePage() {
           </div>
           <div className="flex flex-wrap items-center gap-8 text-[11px]">
             <span>SECURE_SESSION: ACTIVE</span>
-            <span>ENCRYPTION: AES-256-GCM</span>
-            <span>PACING: A24_CINEMATIC</span>
+            <span>ISOLATION: STRICT RLS</span>
+            <span>PACING: EDITORIAL RHYTHM</span>
             <span>UI/UX: WORLD_CLASS</span>
           </div>
         </div>

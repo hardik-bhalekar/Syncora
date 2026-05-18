@@ -31,8 +31,8 @@ export default async function AnalyticsDashboardPage() {
           </h1>
         </div>
         <div className="font-mono text-xs text-[var(--color-text-dimmed)] flex flex-col items-end space-y-1">
-          <span>{"ENGINE_STATE: LIVE | DECIMAL_PRECISION"}</span>
-          <span>CALCULATION_LATENCY: 8MS</span>
+          <span>{"ENGINE_STATE: LIVE | CDC_SYNC_ACTIVE"}</span>
+          <span>RECONCILIATION_LATENCY: &lt;15MS</span>
         </div>
       </div>
 
@@ -98,25 +98,25 @@ export default async function AnalyticsDashboardPage() {
 
 
       <div className="flex flex-col gap-8 mt-6">
-        <AdaptivePanel title="Live Interest Engine & Financial Calculation Microservice" defaultExpanded={true}>
+        <AdaptivePanel title="Automated SLA Escalation Engine & Background Worker Telemetry" defaultExpanded={true}>
           <div className="flex flex-col gap-4 font-mono text-sm">
             <div className="flex items-center justify-between p-6 bg-[var(--color-elevated)] border border-[var(--color-border-strong)] shadow-[var(--shadow-subtle)]">
               <div>
-                <span className="text-[var(--color-text-main)] font-bold">DECIMAL_ENGINE_SCRAPER</span>
-                <span className="text-xs text-[var(--color-text-dimmed)] ml-4">LIVE BANK RATES</span>
+                <span className="text-[var(--color-text-main)] font-bold">INNGEST_ESCALATION_WORKERS</span>
+                <span className="text-xs text-[var(--color-text-dimmed)] ml-4">MONITORING CHECK-IN THRESHOLDS (&lt;70%)</span>
               </div>
               <span className="px-3 py-1 bg-[var(--color-signal-emerald)]/20 text-[var(--color-signal-emerald)] text-xs font-bold border border-[var(--color-signal-emerald)]/30">
-                5.42% BASE_RATE
+                STATUS: ACTIVE_ENFORCED
               </span>
             </div>
 
             <div className="flex items-center justify-between p-6 bg-[var(--color-elevated)] border border-[var(--color-border-strong)] shadow-[var(--shadow-subtle)]">
               <div>
-                <span className="text-[var(--color-text-main)] font-bold">IN_MEMORY_CACHE_LAYER</span>
-                <span className="text-xs text-[var(--color-text-dimmed)] ml-4">HIT RATIO: 99.1%</span>
+                <span className="text-[var(--color-text-main)] font-bold">CIRCUIT_BREAKER_WEBHOOKS</span>
+                <span className="text-xs text-[var(--color-text-dimmed)] ml-4">MICROSOFT TEAMS ADAPTIVE CARDS v1.4</span>
               </div>
               <span className="px-3 py-1 bg-[var(--color-signal-emerald)]/20 text-[var(--color-signal-emerald)] text-xs font-bold border border-[var(--color-signal-emerald)]/30">
-                TTL: 300S
+                RETRIES: EXPONENTIAL BACKOFF
               </span>
             </div>
           </div>
