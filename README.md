@@ -210,6 +210,12 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
+## 🚀 Production Deployment (Vercel)
+
+For step-by-step instructions on configuring production environment variables, Supabase connections, NextAuth secrets, Azure AD SSO, and running post-deployment Prisma migrations on Vercel, please see the complete [Vercel Deployment ENV Setup Guide](file:///c:/Users/User/Documents/GitHub/goal-sync-portal/VERCEL_DEPLOYMENT.md).
+
+---
+
 ## 📜 License
 
 Syncora is proprietary enterprise software. All rights reserved.

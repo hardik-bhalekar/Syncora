@@ -1,4 +1,4 @@
-import { AuditAction } from "@prisma/client"
+import { AuditAction } from "@/prisma/generated/client"
 import { prisma } from "@/lib/prisma"
 import { jsonError, requireSession } from "@/lib/services/authz"
 

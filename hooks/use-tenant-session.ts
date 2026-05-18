@@ -1,6 +1,6 @@
 import { useSession } from "next-auth/react";
 import { useMemo } from "react";
-import { Role } from "@prisma/client";
+import { Role } from "@/prisma/generated/client";
 
 /**
  * Enterprise Auth/Session Orchestration (Phase 6)
