@@ -22,7 +22,7 @@
 **Team Name:** Antigravity (Google DeepMind Advanced Agentic Coding)  
 
 #### **Participant**
-* **Hardik Bhalekar** — Project Lead & Chief Software Architect
+* **Hardik Bhalekar** — Pune Institute of Computer Technology (PICT)
 
 ---
 
