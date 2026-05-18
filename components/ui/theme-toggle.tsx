@@ -32,12 +32,12 @@ export const ThemeToggle: React.FC = () => {
     <InteractiveButton
       variant="secondary"
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="w-10 h-10 p-0 flex items-center justify-center rounded-none font-mono text-xs border border-[var(--color-border)] hover:border-[var(--color-signal-emerald)] transition-colors"
+      className="w-10 h-10 p-0 flex items-center justify-center rounded-none font-mono text-xs border border-[var(--color-border)] hover:border-[var(--color-accent-primary)] transition-colors"
       title={`Switch to ${isDark ? "Light" : "Dark"} Mode`}
     >
       <motion.div
         initial={false}
-        animate={{ rotate: isDark ? 0 : 180, scale: [0.9, 1.1, 1] }}
+        animate={{ rotate: isDark ? 0 : 180, scale: isDark ? 1 : 0.96 }}
         transition={springs.snappy}
         className="flex items-center justify-center text-lg text-[var(--color-text-main)]"
       >

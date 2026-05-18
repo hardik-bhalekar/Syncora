@@ -1,101 +1,110 @@
-import Link from "next/link"
+import Link from "next/link";
+import { Surface } from "@/components/ui/surface";
 
 export default function DesignPreviewPage() {
   return (
-    <main className="editorial-canvas py-16 flex-1 space-y-16">
-      <div className="wireframe-box">
+    <main className="editorial-canvas py-24 flex-1 space-y-20">
+      <Surface elevation="surface" className="p-12 space-y-6">
         <div className="cinematic-kicker">
           <span className="signal-dot signal-dot-cerulean" />
-          Syncora Design Language Specimen
+          Syncora Enterprise Design System
         </div>
 
-        <h1 className="editorial-headline mt-4 text-4xl">
-          Foundational <span className="editorial-headline-italic">Tokens</span> & <br />
-          Architectural Scale.
+        <h1 className="text-cinematic-h1">
+          Foundational <span className="text-cinematic-italic">Tokens</span> & <br />
+          Enterprise Scale.
         </h1>
 
-        <p className="prose-restrained mt-4 text-sm">
-          A definitive specimen of the new Syncora design language. All generic SaaS cards, glassmorphism, AI glitter, and crypto gradients have been abandoned in favor of strict editorial hierarchy and cinematic graphite depth.
+        <p className="text-editorial-body max-w-3xl">
+          A reference view of the Syncora enterprise language system. The interface favors structured hierarchy, operational clarity, and audit-ready presentation.
         </p>
-      </div>
+      </Surface>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-        <div className="wireframe-box space-y-6">
+        <Surface elevation="elevated" className="p-10 space-y-6">
           <div className="cinematic-kicker">01 / COLOR FOUNDATION</div>
-          <div className="space-y-4 telemetry-mono text-xs">
-            <div className="flex items-center justify-between p-3 bg-[var(--color-graphite-base)] border border-[var(--hairline-strong)]">
+          <div className="space-y-4 font-mono text-xs">
+            <div className="flex items-center justify-between p-4 bg-(--color-graphite-base) border border-(--hairline-strong)">
               <span>GRAPHITE BASE</span>
-              <span className="text-[var(--color-alabaster-muted)]">#0A0A0C</span>
+              <span className="text-(--color-alabaster-muted)">#060608</span>
             </div>
-            <div className="flex items-center justify-between p-3 bg-[var(--color-graphite-surface)] border border-[var(--hairline-strong)]">
+            <div className="flex items-center justify-between p-4 bg-(--color-graphite-surface) border border-(--hairline-strong)">
               <span>GRAPHITE SURFACE</span>
-              <span className="text-[var(--color-alabaster-muted)]">#121215</span>
+              <span className="text-(--color-alabaster-muted)">#0E0E12</span>
             </div>
-            <div className="flex items-center justify-between p-3 bg-[var(--color-graphite-elevated)] border border-[var(--hairline-strong)]">
+            <div className="flex items-center justify-between p-4 bg-(--color-graphite-elevated) border border-(--hairline-strong)">
               <span>GRAPHITE ELEVATED</span>
-              <span className="text-[var(--color-alabaster-muted)]">#1A1A1E</span>
+              <span className="text-(--color-alabaster-muted)">#16161B</span>
             </div>
-            <div className="flex items-center justify-between p-3 bg-[var(--color-alabaster-base)] text-[var(--color-graphite-base)] font-bold">
+            <div className="flex items-center justify-between p-4 bg-(--color-alabaster-base) text-(--color-graphite-base) font-bold">
               <span>ALABASTER BASE</span>
-              <span>#F4F4F6</span>
+              <span>#FFFFFF</span>
             </div>
           </div>
-        </div>
+        </Surface>
 
-        <div className="wireframe-box space-y-6">
+        <Surface elevation="elevated" className="p-10 space-y-6">
           <div className="cinematic-kicker">02 / SIGNAL TONES</div>
-          <div className="space-y-4 telemetry-mono text-xs">
-            <div className="flex items-center justify-between p-3 bg-[var(--color-graphite-elevated)] border border-[var(--color-signal-crimson)] text-[var(--color-signal-crimson)]">
+          <div className="space-y-4 font-mono text-xs">
+            <div className="flex items-center justify-between p-4 bg-(--color-graphite-surface) border border-(--color-signal-crimson) text-(--color-signal-crimson)">
               <span className="flex items-center gap-2"><span className="signal-dot signal-dot-crimson" /> SIGNAL CRIMSON</span>
-              <span>#D9383A</span>
+              <span>#F43F5E</span>
             </div>
-            <div className="flex items-center justify-between p-3 bg-[var(--color-graphite-elevated)] border border-[var(--color-signal-cerulean)] text-[var(--color-signal-cerulean)]">
+            <div className="flex items-center justify-between p-4 bg-(--color-graphite-surface) border border-(--color-signal-cerulean) text-(--color-signal-cerulean)">
               <span className="flex items-center gap-2"><span className="signal-dot signal-dot-cerulean" /> SIGNAL CERULEAN</span>
-              <span>#2B5B84</span>
+              <span>#0EA5E9</span>
             </div>
-            <div className="flex items-center justify-between p-3 bg-[var(--color-graphite-elevated)] border border-[var(--color-signal-ochre)] text-[var(--color-signal-ochre)]">
+            <div className="flex items-center justify-between p-4 bg-(--color-graphite-surface) border border-(--color-signal-ochre) text-(--color-signal-ochre)">
               <span className="flex items-center gap-2"><span className="signal-dot signal-dot-ochre" /> SIGNAL OCHRE</span>
-              <span>#C8963E</span>
+              <span>#F59E0B</span>
             </div>
-            <div className="flex items-center justify-between p-3 bg-[var(--color-graphite-elevated)] border border-[var(--color-signal-emerald)] text-[var(--color-signal-emerald)]">
+            <div className="flex items-center justify-between p-4 bg-(--color-graphite-surface) border border-(--color-signal-emerald) text-(--color-signal-emerald)">
               <span className="flex items-center gap-2"><span className="signal-dot signal-dot-emerald" /> SIGNAL EMERALD</span>
-              <span>#2D7D46</span>
+              <span>#10B981</span>
+            </div>
+            <div className="flex items-center justify-between p-4 bg-(--color-graphite-surface) border border-(--color-signal-indigo) text-(--color-signal-indigo)">
+              <span className="flex items-center gap-2"><span className="signal-dot signal-dot-indigo" /> SIGNAL INDIGO</span>
+              <span>#6366F1</span>
+            </div>
+            <div className="flex items-center justify-between p-4 bg-(--color-graphite-surface) border border-(--color-signal-purple) text-(--color-signal-purple)">
+              <span className="flex items-center gap-2"><span className="signal-dot signal-dot-purple" /> SIGNAL PURPLE</span>
+              <span>#8B5CF6</span>
             </div>
           </div>
-        </div>
+        </Surface>
       </div>
 
-      <div className="wireframe-box space-y-8">
+      <Surface elevation="surface" className="p-12 space-y-10">
         <div className="cinematic-kicker">03 / TYPOGRAPHY HIERARCHY</div>
-        <div className="space-y-6">
+        <div className="space-y-8">
           <div>
-            <div className="telemetry-mono text-[var(--color-alabaster-dimmed)] text-xs mb-2">EDITORIAL SERIF [NEWSREADER / DISPLAY]</div>
-            <div className="font-serif text-3xl md:text-5xl text-[var(--color-alabaster-stark)] leading-tight">
-              Strategic Intent & <span className="italic text-[var(--color-parchment-base)]">Operational Velocity</span>.
+            <div className="font-mono text-(--color-alabaster-dimmed) text-xs mb-2">CINEMATIC DISPLAY [INSTRUMENT SERIF]</div>
+            <div className="text-cinematic-display">
+              Strategic Intent & <span className="text-cinematic-italic">Operational Velocity</span>.
             </div>
           </div>
-          <div className="hairline-rule my-4" />
+          <div className="hairline-rule my-6" />
           <div>
-            <div className="telemetry-mono text-[var(--color-alabaster-dimmed)] text-xs mb-2">NARRATIVE SANS [SPACE GROTESK / BODY]</div>
-            <div className="font-sans text-base text-[var(--color-alabaster-muted)] leading-relaxed max-w-2xl">
+            <div className="font-mono text-(--color-alabaster-dimmed) text-xs mb-2">NARRATIVE SANS [INTER / BODY]</div>
+            <div className="text-editorial-body max-w-3xl">
               Syncora choreographs strategic goals, AI check-ins, governance approval, and executive reporting into a single atmospheric operational system. Built for teams that need precision without bureaucracy.
             </div>
           </div>
-          <div className="hairline-rule my-4" />
+          <div className="hairline-rule my-6" />
           <div>
-            <div className="telemetry-mono text-[var(--color-alabaster-dimmed)] text-xs mb-2">TELEMETRY MONO [ROBOTO MONO / DATA]</div>
-            <div className="font-mono text-sm text-[var(--color-alabaster-dimmed)] tracking-wider uppercase">
+            <div className="font-mono text-(--color-alabaster-dimmed) text-xs mb-2">TELEMETRY MONO [GEIST MONO / DATA]</div>
+            <div className="font-mono text-sm text-(--color-alabaster-dimmed) tracking-wider uppercase">
               SYS_ID: SYNC-2026-REV-0 // CADENCE: AUDIT_GRADE // DELTA: +18.4%
             </div>
           </div>
         </div>
 
-        <div className="pt-8 border-t border-[var(--hairline-base)]">
-          <Link href="/" className="telemetry-mono text-[var(--color-alabaster-muted)] hover:text-[var(--color-alabaster-stark)] text-xs">
-            ← RETURN TO LANDING WIREFRAME
+        <div className="pt-10 border-t border-(--hairline-base)">
+          <Link href="/" className="font-mono text-(--color-alabaster-muted) hover:text-(--color-alabaster-stark) text-xs tracking-wider">
+            ← RETURN TO LANDING PAGE
           </Link>
         </div>
-      </div>
+      </Surface>
     </main>
-  )
+  );
 }

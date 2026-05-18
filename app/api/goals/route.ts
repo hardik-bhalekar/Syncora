@@ -15,7 +15,7 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
-    const session = await requireSession(["EMPLOYEE", "MANAGER", "ADMIN"])
+    const session = await requireSession(["EMPLOYEE"])
     const data = await saveGoalDraft({ id: session.user.id, role: session.user.role }, await request.json())
 
     return Response.json({ ok: true, data })

@@ -1,8 +1,9 @@
 /**
- * SYNCORA SPACING & RHYTHM UTILITIES
- * ----------------------------------
+ * SYNCORA CINEMATIC SPACING & RHYTHM UTILITIES
+ * --------------------------------------------
  * Enforcing the Editorial Fibonacci Spacing Scale (4px to 180px)
  * for intentional pacing, dramatic rhythm, and operational density.
+ * Inspired by A24 cinematic pacing and Apple/Linear precision.
  */
 
 /* Vertical Pacing Ladders */
@@ -34,7 +35,7 @@
 .gap-rhythm-5 { gap: var(--space-5); }
 .gap-rhythm-6 { gap: var(--space-6); }
 
-/* Section Pacing Acts */
+/* Cinematic Scene Pacing Acts */
 
 .section-act-marketing {
   padding-top: var(--space-7);
@@ -51,4 +52,26 @@
 .section-act-dashboard {
   padding-top: var(--space-5);
   padding-bottom: var(--space-5);
+}
+
+/* Cinematic Scene Wrappers */
+.cinematic-scene {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  padding: 6rem 0;
+}
+
+.cinematic-scene-constrained {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  padding: 8rem 0;
 }

@@ -1,21 +1,32 @@
-import type { GoalSheetStatus, Prisma, Role } from "@prisma/client"
-import { prisma } from "@/lib/prisma"
+import type { GoalSheetStatus, Role } from "@prisma/client"
 import { createAuditLog } from "@/lib/audit/audit-log"
-import { saveGoalSheetSchema, validateWeightage } from "@/lib/validators/goals"
+import { prisma } from "@/lib/prisma"
+import { createNotification } from "@/lib/services/notification-service"
+import { resolveActorContext } from "@/lib/services/tenant-context"
+import { saveGoalSheetSchema, validateTimelineRules, validateWeightage } from "@/lib/validators/goals"
 
 type Actor = {
   id: string
   role: Role
 }
 
+type InlineGoalEdit = {
+  id: string
+  targetValue?: number
+  weightage?: number
+}
+
 export async function getEmployeeGoalWorkspace(employeeId: string) {
+  const actor = await resolveActorContext(employeeId)
+
   const activeCycle = await prisma.cycle.findFirst({
-    where: { isActive: true },
+    where: { tenantId: actor.tenantId, isActive: true },
     orderBy: { startDate: "desc" },
   })
 
   const goalSheet = await prisma.goalSheet.findFirst({
     where: {
+      tenantId: actor.tenantId,
       employeeId,
       currentCycleId: activeCycle?.id ?? null,
     },
@@ -24,8 +35,7 @@ export async function getEmployeeGoalWorkspace(employeeId: string) {
       goals: {
         include: {
           sharedGoal: true,
-          checkIns: { orderBy: { quarter: "asc" },
-          },
+          checkIns: { orderBy: { quarter: "asc" } },
         },
         orderBy: { createdAt: "asc" },
       },
@@ -39,24 +49,38 @@ export async function getEmployeeGoalWorkspace(employeeId: string) {
 export async function saveGoalDraft(actor: Actor, input: unknown) {
   const parsed = saveGoalSheetSchema.parse(input)
   const weightageError = validateWeightage(parsed.goals)
+  const timelineError = validateTimelineRules(parsed.goals)
 
   if (weightageError) {
     throw new Error(weightageError)
   }
 
+  if (timelineError) {
+    throw new Error(timelineError)
+  }
+
+  const context = await resolveActorContext(actor.id)
+
+  if (context.role !== "EMPLOYEE" && context.role !== "ADMIN") {
+    throw new Error("Only employees can draft goal sheets.")
+  }
+
   return prisma.$transaction(async (tx) => {
     const existingSheet = await tx.goalSheet.findFirst({
       where: {
+        tenantId: context.tenantId,
         employeeId: actor.id,
         currentCycleId: parsed.cycleId ?? null,
       },
       include: { goals: true },
     })
+
     const goalSheet =
       existingSheet ??
       (await tx.goalSheet.create({
         data: {
           employeeId: actor.id,
+          tenantId: context.tenantId,
           currentCycleId: parsed.cycleId ?? null,
         },
         include: { goals: true },
@@ -108,13 +132,14 @@ export async function saveGoalDraft(actor: Actor, input: unknown) {
         uomType: goal.uomType,
         metricDirection: goal.metricDirection,
         targetValue: goal.targetValue,
+        deadlineAt: goal.deadlineAt ? new Date(goal.deadlineAt) : null,
         weightage: goal.weightage,
         status: "DRAFT" as const,
       }
 
       const savedGoal = goal.id
         ? await tx.goal.update({ where: { id: goal.id }, data })
-        : await tx.goal.create({ data: { ...data, goalSheetId: goalSheet.id } })
+        : await tx.goal.create({ data: { ...data, tenantId: goalSheet.tenantId, goalSheetId: goalSheet.id } })
 
       await createAuditLog({
         actorId: actor.id,
@@ -135,13 +160,23 @@ export async function saveGoalDraft(actor: Actor, input: unknown) {
 }
 
 export async function submitGoalSheet(actor: Actor, goalSheetId: string) {
+  const context = await resolveActorContext(actor.id)
+
+  if (context.role !== "EMPLOYEE" && context.role !== "ADMIN") {
+    throw new Error("Only employees can submit their own goal sheets.")
+  }
+
   return prisma.$transaction(async (tx) => {
     const goalSheet = await tx.goalSheet.findUnique({
       where: { id: goalSheetId },
-      include: { goals: true },
+      include: {
+        employee: true,
+        currentCycle: true,
+        goals: true,
+      },
     })
 
-    if (!goalSheet || goalSheet.employeeId !== actor.id) {
+    if (!goalSheet || goalSheet.employeeId !== actor.id || goalSheet.tenantId !== context.tenantId) {
       throw new Error("Goal sheet not found.")
     }
 
@@ -154,8 +189,13 @@ export async function submitGoalSheet(actor: Actor, goalSheetId: string) {
     }
 
     const weightageError = validateWeightage(goalSheet.goals)
+    const timelineError = validateTimelineRules(goalSheet.goals)
     if (weightageError) {
       throw new Error(weightageError)
+    }
+
+    if (timelineError) {
+      throw new Error(timelineError)
     }
 
     const updated = await tx.goalSheet.update({
@@ -177,22 +217,43 @@ export async function submitGoalSheet(actor: Actor, goalSheetId: string) {
       client: tx,
     })
 
+    if (goalSheet.employee.managerId) {
+      await createNotification(tx, {
+        tenantId: context.tenantId,
+        userId: goalSheet.employee.managerId,
+        type: "APPROVAL",
+        title: `${goalSheet.employee.name} submitted goals`,
+        message: `${goalSheet.employee.name} submitted their goal sheet for ${goalSheet.currentCycle?.name ?? "the active cycle"}.`,
+      })
+    }
+
     return updated
   })
 }
 
-export async function reviewGoalSheet(actor: Actor, goalSheetId: string, status: Extract<GoalSheetStatus, "APPROVED" | "REJECTED" | "RETURNED">, goals?: Array<{ id: string; targetValue?: number; weightage?: number }>) {
+export async function reviewGoalSheet(
+  actor: Actor,
+  goalSheetId: string,
+  status: Extract<GoalSheetStatus, "APPROVED" | "REJECTED" | "RETURNED">,
+  goals?: InlineGoalEdit[]
+) {
+  const context = await resolveActorContext(actor.id)
+
+  if (context.role !== "MANAGER" && context.role !== "ADMIN") {
+    throw new Error("Only managers and admins can review goals.")
+  }
+
   return prisma.$transaction(async (tx) => {
     const goalSheet = await tx.goalSheet.findUnique({
       where: { id: goalSheetId },
-      include: { employee: true, goals: true },
+      include: { employee: true, currentCycle: true, goals: true },
     })
 
-    if (!goalSheet) {
+    if (!goalSheet || goalSheet.tenantId !== context.tenantId) {
       throw new Error("Goal sheet not found.")
     }
 
-    if (actor.role === "MANAGER" && goalSheet.employee.managerId !== actor.id) {
+    if (context.role === "MANAGER" && goalSheet.employee.managerId !== actor.id) {
       throw new Error("Managers can only review direct reports.")
     }
 
@@ -217,7 +278,7 @@ export async function reviewGoalSheet(actor: Actor, goalSheetId: string, status:
       }
     }
 
-    const refreshedGoals = await tx.goal.findMany({ where: { goalSheetId } })
+    const refreshedGoals = await tx.goal.findMany({ where: { goalSheetId, tenantId: context.tenantId } })
     const weightageError = validateWeightage(refreshedGoals)
     if (weightageError) {
       throw new Error(weightageError)
@@ -243,15 +304,39 @@ export async function reviewGoalSheet(actor: Actor, goalSheetId: string, status:
       client: tx,
     })
 
+    await createNotification(tx, {
+      tenantId: context.tenantId,
+      userId: goalSheet.employeeId,
+      type: status === "APPROVED" ? "APPROVAL" : status === "REJECTED" ? "REJECTION" : "REWORK",
+      title:
+        status === "APPROVED"
+          ? "Goals approved"
+          : status === "REJECTED"
+            ? "Goals rejected"
+            : "Goals returned for rework",
+      message:
+        status === "APPROVED"
+          ? `Your goal sheet for ${goalSheet.currentCycle?.name ?? "the active cycle"} has been approved and locked.`
+          : status === "REJECTED"
+            ? `Your submitted goals were rejected by ${context.name}.`
+            : `Your manager returned the goal sheet for rework with review comments.`,
+    })
+
     return updated
   })
 }
 
 export async function unlockGoalSheet(actor: Actor, goalSheetId: string, reason: string) {
-  return prisma.$transaction(async (tx) => {
-    const goalSheet = await tx.goalSheet.findUnique({ where: { id: goalSheetId } })
+  const context = await resolveActorContext(actor.id)
 
-    if (!goalSheet) {
+  if (context.role !== "ADMIN") {
+    throw new Error("Only admins can unlock approved goal sheets.")
+  }
+
+  return prisma.$transaction(async (tx) => {
+    const goalSheet = await tx.goalSheet.findUnique({ where: { id: goalSheetId }, include: { employee: true } })
+
+    if (!goalSheet || goalSheet.tenantId !== context.tenantId) {
       throw new Error("Goal sheet not found.")
     }
 
@@ -274,13 +359,26 @@ export async function unlockGoalSheet(actor: Actor, goalSheetId: string, reason:
       client: tx,
     })
 
+    await createNotification(tx, {
+      tenantId: context.tenantId,
+      userId: goalSheet.employeeId,
+      type: "UNLOCK",
+      title: "Goal sheet unlocked by admin",
+      message: `Your goal sheet was unlocked for rework. Reason: ${reason}`,
+    })
+
     return updated
   })
 }
 
 export async function getManagerQueue(managerId: string, role: Role) {
+  const context = await resolveActorContext(managerId)
+
   return prisma.goalSheet.findMany({
-    where: role === "ADMIN" ? {} : { employee: { managerId } },
+    where:
+      role === "ADMIN"
+        ? { tenantId: context.tenantId }
+        : { tenantId: context.tenantId, employee: { managerId } },
     include: {
       employee: true,
       currentCycle: true,
@@ -290,11 +388,19 @@ export async function getManagerQueue(managerId: string, role: Role) {
   })
 }
 
-function cleanGoal(goal: Prisma.GoalGetPayload<Record<string, never>>) {
+function cleanGoal(goal: {
+  id: string
+  title: string
+  targetValue: number
+  deadlineAt?: Date | null
+  weightage: number
+  status: string
+}) {
   return {
     id: goal.id,
     title: goal.title,
     targetValue: goal.targetValue,
+    deadlineAt: goal.deadlineAt,
     weightage: goal.weightage,
     status: goal.status,
   }

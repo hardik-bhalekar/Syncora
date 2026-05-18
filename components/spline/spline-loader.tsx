@@ -14,8 +14,8 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { InteractiveButton } from "@/components/ui/interactive-button";
 
-// Dynamically import Spline using the official Next.js wrapper
-const Spline = dynamic(() => import("@splinetool/react-spline/next"), {
+// Dynamically import Spline using the standard React client wrapper
+const Spline = dynamic(() => import("@splinetool/react-spline"), {
   ssr: false,
   loading: () => <SplineFallback />,
 });
@@ -49,7 +49,7 @@ export const SplineFallback: React.FC<{
     {/* Interactive Force Mount Overlay */}
     {onForceMount ? (
       <div className="relative z-20 flex flex-col items-center gap-3 p-6 text-center backdrop-blur-md bg-[var(--color-surface)]/80 border border-[var(--color-border)] shadow-[var(--shadow-subtle)] max-w-[80%]">
-        <span className="font-mono text-xs text-[var(--color-signal-ochre)] font-bold tracking-widest uppercase">
+        <span className="font-mono text-xs text-[var(--color-accent-primary)] font-bold tracking-widest uppercase">
           {reason || "SPATIAL CANVAS STANDBY"}
         </span>
         <p className="text-xs text-[var(--color-text-muted)] max-w-xs">
@@ -61,7 +61,7 @@ export const SplineFallback: React.FC<{
       </div>
     ) : (
       <div className="relative z-20 flex flex-col items-center gap-3">
-        <div className="w-8 h-8 rounded-full border-2 border-[var(--color-signal-emerald)] border-t-transparent animate-spin" />
+        <div className="w-8 h-8 rounded-full border-2 border-[var(--color-accent-primary)] border-t-transparent animate-spin" />
         <span className="font-mono text-xs text-[var(--color-text-dimmed)] tracking-widest uppercase">
           LOADING SPATIAL ASSET...
         </span>
@@ -106,7 +106,7 @@ export const SplineLoader = React.forwardRef<HTMLDivElement, SplineLoaderProps>(
     const [isLoading, setIsLoading] = React.useState(true);
     const [isTimedOut, setIsTimedOut] = React.useState(false);
     const [forceMount, setForceMount] = React.useState(false);
-    const timeoutRef = React.useRef<ReturnType<typeof setTimeout>>();
+    const timeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
 
     React.useEffect(() => {
       const checkDevice = () => {
@@ -131,11 +131,11 @@ export const SplineLoader = React.forwardRef<HTMLDivElement, SplineLoaderProps>(
         }
       }, 8000);
 
-      return () => clearTimeout(timeoutRef.current);
+      return () => { if (timeoutRef.current) clearTimeout(timeoutRef.current); };
     }, [isLowEnd, isLoading, forceMount]);
 
     const handleLoad = () => {
-      clearTimeout(timeoutRef.current);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
       setIsLoading(false);
     };
 

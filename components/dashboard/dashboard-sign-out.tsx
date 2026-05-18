@@ -9,9 +9,9 @@ export const DashboardSignOut: React.FC = () => {
     <InteractiveButton
       variant="ghost"
       onClick={() => signOut({ callbackUrl: "/login" })}
-      className="text-xs font-mono tracking-wider px-3 py-1 text-[var(--color-text-muted)] hover:text-[var(--color-signal-crimson)]"
+      className="text-xs font-mono tracking-wider px-3 py-1 text-(--color-text-muted) hover:text-(--color-signal-crimson)"
     >
-      [SIGN_OUT]
+      Sign out
     </InteractiveButton>
   );
 };

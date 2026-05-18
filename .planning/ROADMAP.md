@@ -1,19 +1,29 @@
 # Project Roadmap
 
-## Phase 1: Foundation & Aesthetic Reset (Completed)
-- Purge generic SaaS dashboard templates and legacy boilerplate.
-- Establish cinematic graphite design system (`theme.css`, `motion.css`, `design-system.ts`).
-- Integrate typography-driven hierarchy with Geist sans/mono.
+## Phase 1: Authentication & RBAC (High Priority)
+- Secure login, role-based access, protected routes, session handling.
+- Distinct dashboards for Employee, Manager, Admin.
+- Strict data isolation.
 
-## Phase 2: Spline 3D & Auth Guarding (Completed)
-- Implement robust Spline loaders (`spline-loader.tsx`, `hero-scene.tsx`, `auth-scene.tsx`).
-- Configure NextAuth / Prisma adapter for session security.
+## Phase 2: Goal Creation & Validation Engine (High Priority)
+- Employee goal sheet creation, drafting, and submission.
+- Real-time and backend validation (Total weightage = 100%, Min weightage = 10%, Max goals = 8).
 
-## Phase 3: Agentic Development & Telemetry (Active)
-- Install and configure GSD project management system (`.planning/`).
-- Initialize Ralph Loop user story verification (`docs/user-stories/`).
-- Integrate CodeRabbit AI code reviews for autonomous quality assurance.
+## Phase 3: Manager Approval Workflow & Quarterly Check-ins (High Priority)
+- Managers can review, approve, reject, or return goals with inline edits.
+- Goal locking mechanism post-approval.
+- Employees submit quarterly achievements with progress calculation engine.
+- Manager team dashboard for reviews.
 
-## Phase 4: Enterprise Telemetry Expansion (Upcoming)
-- Build advanced OKR alignment graphs and real-time team collaboration sockets.
-- Conduct comprehensive security audit and E2E performance hardening.
+## Phase 4: Audit Trails & Reporting (Medium Priority)
+- Comprehensive audit logging for all critical actions.
+- CSV/Excel export for planned vs actuals.
+- Dashboards with completion rates and QoQ trends.
+
+## Phase 5: Shared Goals & Notifications (Medium Priority)
+- Top-down goal pushing (department KPIs).
+- Submission, approval, and quarterly reminder notifications.
+
+## Phase 6: Escalations & Enterprise Mocks (Low Priority)
+- Rule-based escalations (Employee -> Manager -> HR) for overdue tasks.
+- Microsoft Teams / Entra mock integration for enterprise credibility.

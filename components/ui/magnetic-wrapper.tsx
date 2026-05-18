@@ -62,7 +62,7 @@ export const MagneticWrapper: React.FC<MagneticWrapperProps> = ({ children, rang
 
   return React.cloneElement(children, {
     ref,
-    style: { ...children.props.style, x: springX, y: springY },
+    style: { ...(children as any).props.style, x: springX, y: springY },
     "data-magnetic": true,
-  });
+  } as any);
 };

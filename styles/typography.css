@@ -1,42 +1,89 @@
 /**
  * SYNCORA CENTRALIZED TYPOGRAPHY SYSTEM
  * -------------------------------------
- * Integrating Geist Sans, Geist Mono, and Newsreader Serif into a
- * strict, high-contrast editorial hierarchy scale.
+ * A world-class typography system combining Instrument Serif (oversized, editorial,
+ * tightly kerned headlines) and Inter (clean, enterprise-grade narrative body)
+ * into a highly intentional, cinematic visual hierarchy.
  */
 
-/* Hierarchy Scale Utilities */
+/* --- 1. CINEMATIC HEADLINES (Instrument Serif) --- */
 
-.text-display-2xl {
-  font-family: var(--font-sans), system-ui, sans-serif;
-  font-size: clamp(3rem, 6vw, 4.5rem); /* 72px max */
-  line-height: 1.05;
-  font-weight: 700;
+.text-cinematic-display, .text-display-2xl {
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: clamp(3.5rem, 8vw, 7.5rem); /* Gigantic cinematic scale */
+  line-height: 0.95;
+  font-weight: 400;
+  letter-spacing: -0.04em; /* Tightly kerned */
+  color: var(--color-text-main);
+  margin: 0;
+}
+
+.text-cinematic-h1, .text-display-xl, .editorial-serif-headline {
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: clamp(2.75rem, 6vw, 5.5rem);
+  line-height: 1.02;
+  font-weight: 400;
   letter-spacing: -0.03em;
   color: var(--color-text-main);
+  margin: 0;
 }
 
-.text-display-xl {
-  font-family: var(--font-sans), system-ui, sans-serif;
-  font-size: clamp(2.25rem, 5vw, 3.75rem); /* 60px max */
-  line-height: 1.08;
-  font-weight: 600;
+.text-cinematic-h2, .text-heading-l {
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: clamp(2.25rem, 4.5vw, 4rem);
+  line-height: 1.05;
+  font-weight: 400;
   letter-spacing: -0.02em;
   color: var(--color-text-main);
+  margin: 0;
 }
 
-.text-heading-l {
+.text-cinematic-h3 {
   font-family: var(--font-sans), system-ui, sans-serif;
-  font-size: clamp(1.75rem, 3vw, 2.25rem); /* 36px max */
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
   line-height: 1.12;
   font-weight: 500;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
   color: var(--color-text-main);
+  margin: 0;
 }
 
-.text-body-m {
+/* Expressive Kicker & Italic Utilities */
+.text-cinematic-italic, .editorial-serif-italic {
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--color-accent-primary);
+}
+
+.text-cinematic-italic-indigo {
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--color-accent-primary);
+}
+
+.text-cinematic-italic-ochre {
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--color-accent-primary);
+}
+
+/* --- 2. NARRATIVE BODY & ENTERPRISE PROSE (Inter) --- */
+
+.text-editorial-body, .prose-restrained {
   font-family: var(--font-sans), system-ui, sans-serif;
-  font-size: 1rem; /* 16px */
+  font-size: clamp(1.125rem, 1.5vw, 1.375rem);
+  line-height: 1.65;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--color-text-muted);
+}
+
+.text-dashboard-body, .text-body-m {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 0.875rem; /* 14px */
   line-height: 1.5;
   font-weight: 400;
   letter-spacing: normal;
@@ -46,38 +93,20 @@
 .text-caption-s {
   font-family: var(--font-sans), system-ui, sans-serif;
   font-size: 0.8125rem; /* 13px */
-  line-height: 1.38;
+  line-height: 1.4;
   font-weight: 500;
   letter-spacing: 0.01em;
   color: var(--color-text-dimmed);
 }
 
-/* Expressive Marketing Utilities */
-
-.editorial-serif-headline {
-  font-family: var(--font-serif), Georgia, serif;
-  font-size: clamp(2.5rem, 5vw, 5rem);
-  font-weight: 400;
-  line-height: 1.06;
-  letter-spacing: -0.02em;
-  color: var(--color-text-main);
-}
-
-.editorial-serif-italic {
-  font-family: var(--font-serif), Georgia, serif;
-  font-style: italic;
-  font-weight: 400;
-  color: var(--color-signal-emerald);
-}
-
-/* Operational Dashboard Utilities */
+/* --- 3. TELEMETRY & OPERATIONAL MONO (Geist Mono) --- */
 
 .telemetry-label {
   font-family: var(--font-mono), monospace;
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
   color: var(--color-text-dimmed);
 }
 
@@ -87,4 +116,25 @@
   font-weight: 600;
   letter-spacing: -0.02em;
   color: var(--color-text-main);
+}
+
+.cinematic-kicker {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  color: var(--color-text-dimmed);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.telemetry-mono {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--color-text-dimmed);
 }

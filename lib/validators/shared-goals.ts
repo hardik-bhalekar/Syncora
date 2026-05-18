@@ -8,3 +8,7 @@ export const sharedGoalSchema = z.object({
   employeeIds: z.array(z.string()).min(1),
   localWeightage: z.coerce.number().min(10).max(100),
 })
+
+export const sharedGoalUpdateSchema = sharedGoalSchema.partial().extend({
+  sharedGoalId: z.string(),
+})

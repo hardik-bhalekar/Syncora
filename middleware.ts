@@ -11,11 +11,30 @@ export default withAuth(
       return NextResponse.redirect(new URL("/login", request.url))
     }
 
+    // Enterprise RBAC and Tenancy checks
+    // The token now carries the tenantId for the user
+    const tenantId = token.tenantId as string | undefined;
+
+    if (!tenantId && pathname.startsWith("/dashboard")) {
+      // If a user doesn't belong to a tenant, they shouldn't access tenant workspaces
+      return NextResponse.redirect(new URL("/onboarding/organization", request.url));
+    }
+
     if (!canAccessDashboard(token.role, pathname)) {
       return NextResponse.redirect(new URL(getDashboardHomePath(token.role), request.url))
     }
 
-    return NextResponse.next()
+    // Inject tenantId into headers for downstream API routes to consume natively
+    const requestHeaders = new Headers(request.headers);
+    if (tenantId) {
+      requestHeaders.set('x-tenant-id', tenantId);
+    }
+
+    return NextResponse.next({
+      request: {
+        headers: requestHeaders,
+      }
+    });
   },
   {
     callbacks: {
@@ -28,5 +47,5 @@ export default withAuth(
 )
 
 export const config = {
-  matcher: ["/dashboard/:path*"],
+  matcher: ["/dashboard/:path*", "/api/:path*"],
 }

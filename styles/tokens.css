@@ -1,119 +1,171 @@
 /**
- * SYNCORA DESIGN TOKEN ARCHITECTURE (UI/UX PRO MAX)
- * -------------------------------------------------
- * Foundational token system establishing precise graphite/emerald
- * palettes, editorial spacing ladders, elevation shadows, and touch targets.
+ * SYNCORA CINEMATIC DESIGN TOKEN ARCHITECTURE
+ * -------------------------------------------
+ * PALETTE 8: SUNSET AURORA
+ * Warm, Creative, Premium, Cinematic.
+ * Designed to evoke emotional depth, visual richness, and spatial atmosphere.
  */
 
 :root {
-  /* --- 1. FOUNDATIONAL COLOR PALETTES (UI/UX PRO MAX) --- */
+  /* --- 1. CINEMATIC COLOR PALETTES --- */
   
-  /* Light Mode Architecture */
-  --color-light-bg: #FBFBFB;
-  --color-light-surface: #FFFFFF;
-  --color-light-elevated: #F4F4F5;
-  --color-light-subtle: #E4E4E7;
-  --color-light-text-main: #18181B; /* Deep slate/charcoal */
-  --color-light-text-muted: #71717A;
-  --color-light-text-dimmed: #A1A1AA;
-  --color-light-border: rgba(0, 0, 0, 0.08);
+  /* Dark Mode Architecture (Rich Charcoal Ink & Sunset Aurora) */
+  --color-dark-bg: #0D0E12;
+  --color-dark-surface: #1A1C23;
+  --color-dark-elevated: #242730;
+  --color-dark-subtle: #2D313C;
+  --color-dark-text-main: #ECEFF1;
+  --color-dark-text-muted: #9CA3AF;
+  --color-dark-text-dimmed: #6B7280;
+  --color-dark-border: rgba(236, 239, 241, 0.08);
+  --color-dark-border-strong: rgba(236, 239, 241, 0.16);
 
-  /* Dark Mode Architecture (Cinematic Graphite) */
-  --color-dark-bg: #0A0A0C;
-  --color-dark-surface: #121215;
-  --color-dark-elevated: #1A1A1E;
-  --color-dark-subtle: #222227;
-  --color-dark-text-main: #FFFFFF;
-  --color-dark-text-muted: #A1A1AA;
-  --color-dark-text-dimmed: #71717A;
-  --color-dark-border: rgba(255, 255, 255, 0.08);
-  --color-dark-border-strong: rgba(255, 255, 255, 0.16);
+  /* Light Mode Architecture (Fresh Milk & Crisp Porcelain) */
+  --color-light-bg: #F9F9FB;
+  --color-light-surface: #FFFFFF;
+  --color-light-elevated: #F3F4F6;
+  --color-light-subtle: #E5E7EB;
+  --color-light-text-main: #1F2421;
+  --color-light-text-muted: #6B7280;
+  --color-light-text-dimmed: #9CA3AF;
+  --color-light-border: rgba(31, 36, 33, 0.08);
+  --color-light-border-strong: rgba(31, 36, 33, 0.16);
+
+  /* Primary Accents (Sunset Aurora Theme) */
+  --color-accent-primary-dark: #FF4B91; /* Laser Rose Coral */
+  --color-accent-primary-light: #FF7E5F; /* Sunset Apricot */
 
   /* Intentional Signal Tones */
-  --color-signal-emerald: #10B981; /* Restrained Jade/Emerald */
+  --color-signal-emerald: #10B981;
   --color-signal-emerald-subtle: rgba(16, 185, 129, 0.15);
-  --color-signal-crimson: #EF4444;
-  --color-signal-cerulean: #0284C7;
+  --color-signal-crimson: #F43F5E;
+  --color-signal-cerulean: #0EA5E9;
   --color-signal-ochre: #F59E0B;
   --color-signal-indigo: #6366F1;
+  --color-signal-purple: #8B5CF6;
 
-  /* --- 2. EDITORIAL FIBONACCI SPACING LADDER --- */
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 16px;
-  --space-4: 24px;
-  --space-5: 40px;
-  --space-6: 64px;
-  --space-7: 112px;
-  --space-8: 180px;
-
-  /* --- 3. ELEVATION & ETHEREAL SHADOWS (21st.dev) --- */
-  --shadow-subtle-light: 0 2px 8px rgba(0, 0, 0, 0.04);
-  --shadow-elevated-light: 0 4px 20px -2px rgba(0, 0, 0, 0.08);
+  /* --- 2. AURORA GLOW & LIGHTING SYSTEM --- */
+  --color-glow-primary-dark: rgba(255, 75, 145, 0.25);
+  --color-glow-primary-light: rgba(255, 126, 95, 0.25);
   
-  --shadow-subtle-dark: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
-  --shadow-ethereal-emerald: 0 4px 20px -2px rgba(16, 185, 129, 0.15);
-  --shadow-ethereal-indigo: 0 0 20px rgba(99, 102, 241, 0.1);
+  --color-glow-emerald: rgba(16, 185, 129, 0.25);
+  --color-glow-indigo: rgba(99, 102, 241, 0.25);
+  --color-glow-amber: rgba(245, 158, 11, 0.25);
+  --color-glow-cyan: rgba(14, 165, 233, 0.25);
+  --color-glow-purple: rgba(139, 92, 246, 0.25);
+  
+  --color-ambient-light: radial-gradient(circle at 50% 0%, rgba(236, 239, 241, 0.05) 0%, transparent 70%);
+  --color-ambient-primary-dark: radial-gradient(circle at 50% 0%, rgba(255, 75, 145, 0.12) 0%, transparent 70%);
+  --color-ambient-primary-light: radial-gradient(circle at 50% 0%, rgba(255, 126, 95, 0.12) 0%, transparent 70%);
 
-  /* --- 4. MOTION ARCHITECTURE (Framer Motion Profiles) --- */
+  /* --- 3. PREMIUM GLASS SYSTEM & TRANSLUCENT PANELS --- */
+  --glass-bg: rgba(26, 28, 35, 0.65);
+  --glass-bg-light: rgba(255, 255, 255, 0.65);
+  --glass-border: rgba(236, 239, 241, 0.12);
+  --glass-border-light: rgba(31, 36, 33, 0.12);
+  --glass-blur: 24px;
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  --glass-shadow-light: 0 8px 32px 0 rgba(31, 36, 33, 0.08);
+
+  /* --- 4. BLUR SYSTEM (Premium Optical Depth) --- */
+  --blur-sm: 4px;
+  --blur-md: 12px;
+  --blur-lg: 24px;
+  --blur-xl: 40px;
+  --blur-2xl: 64px;
+
+  /* --- 5. ETHEREAL SHADOW SYSTEM --- */
+  --shadow-subtle-dark: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
+  --shadow-subtle-light: 0 2px 8px rgba(31, 36, 33, 0.04);
+  --shadow-elevated-dark: 0 12px 40px -4px rgba(0, 0, 0, 0.7);
+  --shadow-elevated-light: 0 8px 30px -4px rgba(31, 36, 33, 0.08);
+  --shadow-float: 0 20px 50px -10px rgba(0, 0, 0, 0.8);
+  
+  --shadow-ethereal-primary-dark: 0 0 30px -5px rgba(255, 75, 145, 0.25);
+  --shadow-ethereal-primary-light: 0 0 30px -5px rgba(255, 126, 95, 0.25);
+
+  /* --- 6. MOTION TIMING SYSTEM & ANIMATION TOKENS --- */
+  --ease-cinematic: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-snappy: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-calm: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-calm: cubic-bezier(0.25, 1, 0.5, 1);
   --ease-heavy: cubic-bezier(0.25, 0.1, 0.25, 1);
 
-  --duration-quick: 200ms;
-  --duration-base: 400ms;
-  --duration-slow: 700ms;
-  --duration-epic: 1200ms;
+  --duration-quick: 150ms;
+  --duration-base: 300ms;
+  --duration-slow: 600ms;
+  --duration-cinematic: 1000ms;
+  --duration-epic: 1500ms;
 
-  /* --- 5. TOUCH TARGETS & ERGONOMICS (CRITICAL UX) --- */
+  /* --- 7. INTERACTION STATES & ERGONOMICS --- */
+  --opacity-hover: 0.9;
+  --opacity-active: 0.75;
+  --scale-hover: 1.01;
+  --scale-active: 0.98;
   --touch-target-min: 40px;
 
-  /* --- 6. FONT & LEGACY ALIASES --- */
-  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
-  --font-space-grotesk: var(--font-geist-sans), system-ui, sans-serif;
+  /* --- 8. FONT ALIASES --- */
+  --font-sans: var(--font-sans), system-ui, sans-serif;
+  --font-serif: var(--font-serif), Georgia, serif;
   --font-mono: var(--font-geist-mono), monospace;
 
-  --color-graphite-base: var(--color-dark-bg);
-  --color-graphite-surface: var(--color-dark-surface);
-  --color-graphite-elevated: var(--color-dark-elevated);
-  --color-graphite-subtle: var(--color-dark-subtle);
-
-  --color-alabaster-stark: var(--color-dark-text-main);
-  --color-alabaster-base: var(--color-dark-text-main);
-  --color-alabaster-muted: var(--color-dark-text-muted);
-  --color-alabaster-dimmed: var(--color-dark-text-dimmed);
-
-  --color-parchment-base: #E2DFD8;
-  --color-parchment-subtle: #C9C6BF;
-
+  /* Hairlines */
   --hairline-base: var(--color-dark-border);
   --hairline-strong: var(--color-dark-border-strong);
 }
 
-/* Theme Mappings (Defaulting to Dark Mode Cinematic Graphite as base) */
+/* Theme Mappings (Defaulting to Dark Mode: Sunset Aurora Base) */
 :root {
   --color-bg: var(--color-dark-bg);
   --color-surface: var(--color-dark-surface);
   --color-elevated: var(--color-dark-elevated);
   --color-subtle: var(--color-dark-subtle);
+  
   --color-text-main: var(--color-dark-text-main);
   --color-text-muted: var(--color-dark-text-muted);
   --color-text-dimmed: var(--color-dark-text-dimmed);
+  
   --color-border: var(--color-dark-border);
   --color-border-strong: var(--color-dark-border-strong);
+  
+  --color-accent-primary: var(--color-accent-primary-dark);
+  --color-glow-primary: var(--color-glow-primary-dark);
+  --color-ambient-primary: var(--color-ambient-primary-dark);
+  
   --shadow-subtle: var(--shadow-subtle-dark);
+  --shadow-elevated: var(--shadow-elevated-dark);
+  --shadow-ethereal-primary: var(--shadow-ethereal-primary-dark);
+  
+  --glass-surface-bg: var(--glass-bg);
+  --glass-surface-border: var(--glass-border);
+  --glass-surface-shadow: var(--glass-shadow);
 }
 
-/* Light Theme Override */
+/* Light Theme Override (Sunset Aurora Light) */
 [data-theme='light'] {
   --color-bg: var(--color-light-bg);
   --color-surface: var(--color-light-surface);
   --color-elevated: var(--color-light-elevated);
   --color-subtle: var(--color-light-subtle);
+  
   --color-text-main: var(--color-light-text-main);
   --color-text-muted: var(--color-light-text-muted);
   --color-text-dimmed: var(--color-light-text-dimmed);
+  
   --color-border: var(--color-light-border);
-  --color-border-strong: rgba(0, 0, 0, 0.16);
+  --color-border-strong: var(--color-light-border-strong);
+  
+  --color-accent-primary: var(--color-accent-primary-light);
+  --color-glow-primary: var(--color-glow-primary-light);
+  --color-ambient-primary: var(--color-ambient-primary-light);
+  
   --shadow-subtle: var(--shadow-subtle-light);
+  --shadow-elevated: var(--shadow-elevated-light);
+  --shadow-ethereal-primary: var(--shadow-ethereal-primary-light);
+  
+  --glass-surface-bg: var(--glass-bg-light);
+  --glass-surface-border: var(--glass-border-light);
+  --glass-surface-shadow: var(--glass-shadow-light);
+
+  --hairline-base: var(--color-light-border);
+  --hairline-strong: var(--color-light-border-strong);
 }

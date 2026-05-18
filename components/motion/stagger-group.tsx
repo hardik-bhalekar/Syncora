@@ -9,9 +9,11 @@
 
 import * as React from "react";
 import { motion } from "framer-motion";
-import { staggerContainerVariants, fadeInVariants } from "@/lib/motion/springs";
+import { staggerContainer, staggerItemReveal } from "@/lib/motion/transitions";
 
-export interface StaggerGroupProps extends React.HTMLAttributes<HTMLDivElement> {
+type CleanDivProps = Omit<React.HTMLAttributes<HTMLDivElement>, "onDrag" | "onDragStart" | "onDragEnd" | "onDragEnter" | "onDragLeave" | "onDragOver" | "onAnimationStart" | "onAnimationEnd" | "onAnimationIteration">;
+
+export interface StaggerGroupProps extends CleanDivProps {
   staggerDelay?: number;
   className?: string;
 }
@@ -19,8 +21,9 @@ export interface StaggerGroupProps extends React.HTMLAttributes<HTMLDivElement> 
 export const StaggerGroup = React.forwardRef<HTMLDivElement, StaggerGroupProps>(
   ({ className, staggerDelay = 0.05, children, ...props }, ref) => {
     const customVariants = React.useMemo(() => ({
-      ...staggerContainerVariants,
-      animate: {
+      ...staggerContainer,
+      show: {
+        ...staggerContainer.show,
         transition: {
           staggerChildren: staggerDelay,
           delayChildren: 0.1,
@@ -32,8 +35,8 @@ export const StaggerGroup = React.forwardRef<HTMLDivElement, StaggerGroupProps>(
       <motion.div
         ref={ref}
         variants={customVariants}
-        initial="initial"
-        animate="animate"
+        initial="hidden"
+        animate="show"
         exit="exit"
         className={className}
         {...props}
@@ -45,14 +48,14 @@ export const StaggerGroup = React.forwardRef<HTMLDivElement, StaggerGroupProps>(
 );
 StaggerGroup.displayName = "StaggerGroup";
 
-export interface StaggerItemProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface StaggerItemProps extends CleanDivProps {
   className?: string;
 }
 
 export const StaggerItem = React.forwardRef<HTMLDivElement, StaggerItemProps>(
   ({ className, children, ...props }, ref) => {
     return (
-      <motion.div ref={ref} variants={fadeInVariants} className={className} {...props}>
+      <motion.div ref={ref} variants={staggerItemReveal} className={className} {...props}>
         {children}
       </motion.div>
     );

@@ -4,8 +4,8 @@
 @import "../styles/rhythm.css";
 
 /**
- * SYNCORA FOUNDATIONAL CSS ARCHITECTURE
- * -------------------------------------
+ * SYNCORA FOUNDATIONAL CSS ARCHITECTURE & CINEMATIC RESET
+ * -------------------------------------------------------
  * A total departure from templated SaaS, AI-glitter, glassmorphism,
  * and boxed dashboard patterns. Clean foundational reset and bespoke
  * architectural utility layers for an editorial, cinematic interface.
@@ -30,6 +30,26 @@ body {
   padding: 0;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* Custom Cinematic Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-subtle);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-muted);
 }
 
 /* Architectural Utilities */
@@ -63,51 +83,6 @@ body {
   background-color: var(--color-border);
 }
 
-.cinematic-kicker {
-  font-family: var(--font-mono), monospace;
-  font-size: 0.6875rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.24em;
-  color: var(--color-text-dimmed);
-  margin-bottom: 0.75rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.editorial-headline {
-  font-family: var(--font-serif), Georgia, serif;
-  font-size: clamp(2rem, 4vw, 4.5rem);
-  font-weight: 400;
-  line-height: 1.08;
-  letter-spacing: -0.02em;
-  color: var(--color-text-main);
-  margin: 0;
-}
-
-.editorial-headline-italic {
-  font-style: italic;
-  color: var(--color-signal-emerald);
-}
-
-.prose-restrained {
-  font-family: var(--font-sans), system-ui, sans-serif;
-  font-size: 1rem;
-  line-height: 1.7;
-  color: var(--color-text-muted);
-  max-width: 640px;
-  margin-top: 1.25rem;
-}
-
-.telemetry-mono {
-  font-family: var(--font-mono), monospace;
-  font-size: 0.8125rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  color: var(--color-text-dimmed);
-}
-
 .marginalia-column {
   border-left: 1px solid var(--color-border);
   padding-left: 1.5rem;
@@ -123,10 +98,7 @@ body {
   display: inline-block;
 }
 
-.signal-dot-crimson { background-color: var(--color-signal-crimson); }
-.signal-dot-cerulean { background-color: var(--color-signal-cerulean); }
-.signal-dot-ochre { background-color: var(--color-signal-ochre); }
-.signal-dot-emerald { background-color: var(--color-signal-emerald); }
+.signal-dot-primary { background-color: var(--color-accent-primary); }
 
 /* Foundational Wireframe Container */
 .wireframe-box {
@@ -135,3 +107,70 @@ body {
   padding: 3rem;
   border-radius: 0; /* Strict architectural corners */
 }
+
+/* Cinematic Shaders & Depth Fog */
+.depth-fog-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 30vh;
+  background: linear-gradient(to bottom, var(--color-bg) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 5;
+}
+
+.depth-fog-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 30vh;
+  background: linear-gradient(to top, var(--color-bg) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 5;
+}
+
+.ambient-glow-primary {
+  position: absolute;
+  width: 60vw;
+  height: 60vw;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--color-glow-primary) 0%, transparent 70%);
+  filter: blur(var(--blur-2xl));
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.6;
+}
+
+/* Glass UI Systems */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+[data-theme='light'] .glass-panel {
+  background: var(--glass-bg-light);
+  border: 1px solid var(--glass-border-light);
+  box-shadow: var(--glass-shadow-light);
+}
+
+.glass-pill {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: 9999px;
+}
+
+[data-theme='light'] .glass-pill {
+  background: var(--glass-bg-light);
+  border: 1px solid var(--glass-border-light);
+  box-shadow: var(--glass-shadow-light);
+}
+
+/* Cache bust: force Tailwind v4 reload for Sunset Aurora theme */

@@ -5,9 +5,20 @@ type ProgressInput = {
   targetValue: number
   actualValue: number
   plannedValue?: number
+  deadlineAt?: Date | string | null
+  completionAt?: Date | string | null
+  cycleStartAt?: Date | string | null
 }
 
-export function calculateProgressPercentage({ direction, targetValue, actualValue, plannedValue }: ProgressInput) {
+export function calculateProgressPercentage({
+  direction,
+  targetValue,
+  actualValue,
+  plannedValue,
+  deadlineAt,
+  completionAt,
+  cycleStartAt,
+}: ProgressInput) {
   if (direction === "ZERO_BASED") {
     return actualValue === 0 ? 100 : 0
   }
@@ -21,11 +32,28 @@ export function calculateProgressPercentage({ direction, targetValue, actualValu
   }
 
   if (direction === "TIMELINE") {
-    if (!plannedValue || plannedValue <= 0) {
-      return actualValue > 0 ? 100 : 0
+    const deadline = toDate(deadlineAt)
+    const completion = toDate(completionAt) ?? new Date()
+    const cycleStart = toDate(cycleStartAt)
+
+    if (actualValue <= 0) {
+      return 0
     }
 
-    return clamp((plannedValue / Math.max(actualValue, 1)) * 100)
+    if (!deadline) {
+      return plannedValue && plannedValue > 0 ? clamp((plannedValue / Math.max(actualValue, 1)) * 100) : 100
+    }
+
+    if (completion <= deadline) {
+      return 100
+    }
+
+    const normalizedStart = cycleStart ?? new Date(deadline.getTime() - 90 * 24 * 60 * 60 * 1000)
+    const timelineSpan = Math.max(deadline.getTime() - normalizedStart.getTime(), 24 * 60 * 60 * 1000)
+    const lateness = Math.max(completion.getTime() - deadline.getTime(), 0)
+    const progress = 100 - (lateness / timelineSpan) * 100
+
+    return clamp(progress)
   }
 
   if (targetValue === 0) {
@@ -53,4 +81,13 @@ export function progressStatus(progressPercentage: number): ProgressStatus {
 
 function clamp(value: number) {
   return Math.max(0, Math.min(100, Math.round(value * 100) / 100))
+}
+
+function toDate(value?: Date | string | null) {
+  if (!value) {
+    return null
+  }
+
+  const date = value instanceof Date ? value : new Date(value)
+  return Number.isNaN(date.getTime()) ? null : date
 }

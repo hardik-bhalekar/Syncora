@@ -4,7 +4,7 @@ import { submitGoalSheet } from "@/lib/services/goal-service"
 
 export async function POST(request: Request) {
   try {
-    const session = await requireSession(["EMPLOYEE", "MANAGER", "ADMIN"])
+    const session = await requireSession(["EMPLOYEE"])
     const parsed = submitGoalSheetSchema.parse(await request.json())
     const data = await submitGoalSheet({ id: session.user.id, role: session.user.role }, parsed.goalSheetId)
 

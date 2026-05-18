@@ -10,6 +10,7 @@ export const goalInputSchema = z.object({
   targetValue: z.coerce.number().positive(),
   weightage: z.coerce.number().min(10).max(100),
   sharedGoalId: z.string().optional().nullable(),
+  deadlineAt: z.string().datetime().optional().nullable(),
 })
 
 export const saveGoalSheetSchema = z.object({
@@ -52,6 +53,16 @@ export function validateWeightage(goals: Array<{ weightage: number }>) {
   const total = goals.reduce((sum, goal) => sum + Number(goal.weightage), 0)
   if (Math.round(total * 100) / 100 !== 100) {
     return "Total weightage must equal exactly 100%."
+  }
+
+  return null
+}
+
+export function validateTimelineRules(goals: Array<{ uomType?: string; deadlineAt?: string | Date | null }>) {
+  const timelineGoals = goals.filter((goal) => goal.uomType === "TIMELINE")
+
+  if (timelineGoals.some((goal) => !goal.deadlineAt)) {
+    return "Timeline goals must include a deadline."
   }
 
   return null
