@@ -151,7 +151,7 @@ export function EmployeeWorkspace({
     }
     setMessage(null);
     try {
-      await fetch("/api/goals", {
+      const draftRes = await fetch("/api/goals", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -170,15 +170,18 @@ export function EmployeeWorkspace({
           })),
         }),
       });
+      const draftData = await draftRes.json();
+      if (!draftRes.ok || !draftData.ok) throw new Error(draftData.error || "Failed to save goals");
 
-      if (!initialGoalSheet?.id) {
+      const sheetId = draftData.data?.id || initialGoalSheet?.id;
+      if (!sheetId) {
         throw new Error("Goal sheet ID not found. Please save draft first.");
       }
 
       const res = await fetch("/api/goals/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ goalSheetId: initialGoalSheet.id }),
+        body: JSON.stringify({ goalSheetId: sheetId }),
       });
       const data = await res.json();
       if (!res.ok || !data.ok) throw new Error(data.error || "Failed to submit goal sheet");

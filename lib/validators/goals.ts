@@ -41,7 +41,7 @@ export const unlockGoalSheetSchema = z.object({
   reason: z.string().trim().min(3).max(1000),
 })
 
-export function validateWeightage(goals: Array<{ weightage: number }>) {
+export function validateWeightage(goals: Array<{ weightage: number }>, isDraft = false) {
   if (goals.length > 8) {
     return "Maximum goals per employee is 8."
   }
@@ -51,7 +51,7 @@ export function validateWeightage(goals: Array<{ weightage: number }>) {
   }
 
   const total = goals.reduce((sum, goal) => sum + Number(goal.weightage), 0)
-  if (Math.round(total * 100) / 100 !== 100) {
+  if (!isDraft && Math.round(total * 100) / 100 !== 100) {
     return "Total weightage must equal exactly 100%."
   }
 

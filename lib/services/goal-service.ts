@@ -49,7 +49,7 @@ export async function getEmployeeGoalWorkspace(employeeId: string) {
 
 export async function saveGoalDraft(actor: Actor, input: unknown) {
   const parsed = saveGoalSheetSchema.parse(input)
-  const weightageError = validateWeightage(parsed.goals)
+  const weightageError = validateWeightage(parsed.goals, true)
   const timelineError = validateTimelineRules(parsed.goals)
 
   if (weightageError) {

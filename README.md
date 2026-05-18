@@ -4,29 +4,50 @@
 ![React Three Fiber](https://img.shields.io/badge/React_Three_Fiber-v9-black?style=for-the-badge&logo=react)
 ![Prisma](https://img.shields.io/badge/Prisma_ORM-v6-2D3748?style=for-the-badge&logo=prisma)
 ![Postgres](https://img.shields.io/badge/Postgres_pgvector-336791?style=for-the-badge&logo=postgresql)
-![Inngest](https://img.shields.io/badge/Inngest_Workers-E11D48?style=for-the-badge&logo=inngest)
-![Upstash Redis](https://img.shields.io/badge/Upstash_Redis-v1-DC382D?style=for-the-badge&logo=redis)
-![Supabase Realtime](https://img.shields.io/badge/Supabase_CDC-3ECF8E?style=for-the-badge&logo=supabase)
+![Supabase](https://img.shields.io/badge/Supabase_PostgreSQL-3ECF8E?style=for-the-badge&logo=supabase)
+![Vercel](https://img.shields.io/badge/Vercel_Deployed-000000?style=for-the-badge&logo=vercel)
 ![CI/CD Passing](https://img.shields.io/badge/CI%2FCD_Quality_Gates-Passing-brightgreen?style=for-the-badge&logo=githubactions)
 
 ---
 
-## Executive Summary
+## 🚀 Hackathon Final Submission Links
 
-**Syncora** is a high-performance, multi-tenant Software-as-a-Service (SaaS) platform engineered to orchestrate organizational goal alignment, track quarterly Key Performance Indicators (KPIs), manage multi-tier approval workflows, and automate SLA escalations.
-
-Built on a cutting-edge modern stack, Syncora combines high-fidelity cinematic styling, complex Framer Motion spring physics, and an interactive React Three Fiber (R3F) 3D canvas ("Goal Galaxy") with an uncompromising, zero-trust backend architecture.
+| Resource | Direct Link / Details |
+| :--- | :--- |
+| **Hosted Live Demo URL** | [https://syncora-portal.vercel.app](https://syncora-portal.vercel.app) |
+| **GitHub Repository** | [https://github.com/hardik-bhalekar/Syncora](https://github.com/hardik-bhalekar/Syncora) |
+| **Architecture Diagram** | Included below & exported as standalone artifact |
+| **Final Submission PDF** | Generated in project root (`final_submission_document.pdf`) |
 
 ---
 
-## System Architecture
+## 🔐 Seeded Demo Accounts (Ready for Judging)
+
+To ensure judges can test all role flows instantly, the database is pre-seeded with active demo accounts across an enterprise organization (`Syncora Enterprise`).
+
+| Role | Email | Password | Pre-seeded State & Data |
+| :--- | :--- | :--- | :--- |
+| **Employee 1** | `employee@syncora.com` | `Demo@123` | • 1 Approved Goal Sheet<br>• 1 Completed Q3 Check-in<br>• 1 Assigned Shared Goal |
+| **Employee 2** | `employee2@syncora.com` | `Demo@123` | • 1 Pending Approval Goal Sheet (Submitted) |
+| **Manager** | `manager@syncora.com` | `Demo@123` | • Direct Manager for Employee 1 & 2<br>• Owner of Shared Enterprise Goal |
+| **Admin** | `admin@syncora.com` | `Demo@123` | • Full Tenant Admin access<br>• Audit Logs & Goal Unlocking capabilities |
+
+> [!TIP]
+> **Judges Demo Sequence:**
+> 1. Log in as **Employee 1** (`employee@syncora.com`) to view an approved goal sheet and completed check-in.
+> 2. Log in as **Manager** (`manager@syncora.com`) to review, edit, and approve Employee 2's pending goal sheet.
+> 3. Log in as **Admin** (`admin@syncora.com`) to view audit logs, organization metrics, or unlock goal sheets.
+
+---
+
+## 🏛 System Architecture
 
 Syncora operates on a fully decoupled, multi-layered enterprise architecture designed for maximum reliability, multi-tenant data isolation, and real-time responsiveness.
 
 ```mermaid
 graph TD
     %% Client & Presentation Layer
-    subgraph Client ["Client & Presentation Layer"]
+    subgraph Client ["Client & Presentation Layer (Next.js App Router)"]
         UI[Next.js App Router Shells]
         R3F[React Three Fiber 3D Galaxy]
         FM[Framer Motion Spring Engine]
@@ -38,7 +59,7 @@ graph TD
 
     %% API Gateway & Auth Layer
     subgraph Gateway ["API Gateway & Security Layer"]
-        NA[NextAuth.js OIDC / SSO]
+        NA[NextAuth.js OIDC / Azure Entra ID SSO]
         GW[API Gateway & HMAC Verifiers]
         RL[Upstash Redis Rate Limiter]
         ZOD[Zod Input Validation]
@@ -71,7 +92,7 @@ graph TD
     %% Data & Worker Layer
     subgraph DataLayer ["Data & Async Worker Layer"]
         PRISMA[Prisma ORM]
-        PG[Postgres + pgvector DB]
+        PG[Supabase PostgreSQL + pgvector]
         REDIS[Upstash Redis Cache]
         CDC[Supabase Realtime CDC]
         INN[Inngest Async Background Workers]
@@ -118,22 +139,22 @@ graph TD
 
 ---
 
-## Core Enterprise Capabilities
+## 🌟 Core Enterprise Capabilities & Validations
 
 ### 🏢 1. Multi-Tenant Core & Zero-Trust RBAC
 * **Strict Tenant Isolation:** Every database entity (`User`, `GoalSheet`, `Goal`, `SharedGoal`, `CheckIn`, `Escalation`, `AuditLog`) is strictly partitioned by `tenantId`. Database interactions are encapsulated inside tenant-scoped transaction blocks.
 * **4-Tier Hierarchical RBAC:** Fine-grained role enforcement (`EMPLOYEE`, `MANAGER`, `ADMIN`, `SUPER_ADMIN`) across UI navigation shells, API route handlers, and database mutations.
-* **Enterprise SSO / OIDC:** Seamless authentication via Google, Azure AD (Microsoft Entra ID), GitHub, and secure credentials, supporting verified automatic account linking.
+* **Enterprise SSO / OIDC:** Seamless authentication via Microsoft Azure Entra ID, Google, and secure credentials, supporting verified automatic account linking.
 
-### 🌌 2. Cinematic UI & 3D "Goal Galaxy"
+### 🎯 2. Mandatory Server-Side Validations (BRD Compliant)
+* **Total Weightage:** Exact cumulative weightage enforcement ($\sum \text{Weightage} = 100\%$) evaluated server-side at submission time.
+* **Max Goals:** Strict cap of $Goals_{max} = 8$ per employee goal sheet.
+* **Minimum Goal Weightage:** Every individual goal must satisfy $\text{Weightage}_{goal} \geq 10\%$.
+
+### 🌌 3. Cinematic UI & 3D "Goal Galaxy"
 * **Editorial Design System:** Built with layered graphite depth (`#111111`, `#1a1a1a`), modern typography (Inter/Geist), and Fibonacci spacing tokens (`0.5rem`, `1rem`, `1.5rem`, `2.5rem`, `4rem`).
 * **React Three Fiber 3D Canvas:** An interactive, cinematic 3D visualization mapping organizational hierarchy and KPI alignment, fortified with WebGL context loss recovery and GPU memory disposal guards.
 * **Calm Spring Motion:** Smooth, CPU-optimized Framer Motion spring physics (`stiffness: 100`, `damping: 15`).
-
-### 🎯 3. Goal Lifecycle & Shared Synchronization
-* **Mathematical Exactness:** Enforces a minimum weightage of 10% per goal and exact 100% cumulative weightage per goal sheet (1 to 8 goals max).
-* **Shared Goal Propagation:** Managers can broadcast `SharedGoal` entities to employee cohorts. Changes automatically propagate to child `GoalAssignment` records, instantly recalculating local weightages.
-* **Cryptographic Locking:** Fully approved goal sheets are logically locked against unauthorized edits or resubmissions.
 
 ### ⚡ 4. Real-Time CDC & SLA Escalation Engine
 * **Supabase Realtime CDC:** Subscribes to Postgres Change Data Capture (CDC) to reconcile TanStack Query client caches instantly without expensive full-page refetches.
@@ -142,61 +163,19 @@ graph TD
 
 ---
 
-## Enterprise STLC Audit & QA Blueprint
+## 🎁 High-Impact Bonus Features Implemented
 
-Syncora has undergone a complete, enterprise-grade Software Testing Life Cycle (STLC) audit. The exhaustive QA blueprint is documented in:
-👉 **[`syncora_stlc_audit_and_execution_plan.md`](file:///C:/Users/User/.gemini/antigravity/brain/b01b10d9-bab8-4a27-80b4-3e0758bba100/syncora_stlc_audit_and_execution_plan.md)**
-
-### Automated Testing Harness (14 Tests Passing)
-The platform implements a multi-layered automated testing pyramid utilizing native Node.js test runners (`node:test`, `node:assert/strict`) and Zod schema verifiers.
-
-```bash
-npm run test
-```
-
-#### Verified Test Suites:
-1. **`tests/workflow-validation.test.ts`**: Verifies 100% cumulative weightage rules, 10% minimum weightage limits, 8-goal maximum constraints, and progress percentage calculations across varied metric directions (`HIGHER_IS_BETTER`, `LOWER_IS_BETTER`, `ZERO_BASED`).
-2. **`tests/rbac.test.ts`**: Validates role hierarchy resolution, verifies correct dashboard home path routing, and enforces strict route access permission boundaries (`canAccessDashboard`).
-3. **`tests/security-validators.test.ts`**: Exercises Zod validation schemas (`goalInputSchema`, `saveGoalSheetSchema`, `approvalSchema`, `unlockGoalSheetSchema`), verifying strict string length boundaries, numeric constraints, type coercion, and malicious payload rejection.
-4. **`tests/circuit-breaker.test.ts`**: Exercises `CircuitBreaker` and `withRetry`. Demonstrates elite chaos engineering by simulating downstream service outages, verifying breaker tripping to `OPEN` state, instant fallback execution, and exponential backoff retry loops.
-
-```
-✔ Reliability: CircuitBreaker executes primary action when closed (5.3ms)
-✔ Reliability: CircuitBreaker trips to OPEN state and executes fallback after failure threshold (50.8ms)
-✔ Reliability: withRetry succeeds on subsequent attempt with exponential backoff (37.9ms)
-✔ Reliability: withRetry throws error if all attempts fail (26.9ms)
-✔ RBAC: resolves correct dashboard home path per role (17.0ms)
-✔ RBAC: returns appropriate navigation items based on role hierarchy (0.7ms)
-✔ RBAC: enforces strict path access permissions (0.7ms)
-✔ Security Validator: goalInputSchema enforces string lengths and numeric boundaries (93.6ms)
-✔ Security Validator: saveGoalSheetSchema validates goal count limits (7.5ms)
-✔ Security Validator: approvalSchema validates manager review payloads (5.8ms)
-✔ Security Validator: unlockGoalSheetSchema enforces mandatory reason string (2.3ms)
-✔ requires total weightage to equal exactly 100 (8.1ms)
-✔ requires minimum weightage and maximum goal count (0.7ms)
-✔ calculates progress for supported metric directions (16.0ms)
-
-ℹ tests 14
-ℹ suites 0
-ℹ pass 14
-ℹ fail 0
-```
-
-### GitHub Actions CI/CD Quality Gates
-The repository is fully fortified with a production-grade CI/CD pipeline (`.github/workflows/qa-pipeline.yml`) that enforces:
-* ESLint & Prettier formatting guards.
-* CodeQL static security scanning.
-* Docker Testcontainers-backed Postgres (`pgvector`) & Redis integration matrices.
-* Playwright headless E2E system journeys.
-* Automated quality gate sign-off before any PR merge.
+1. **Microsoft Azure Entra ID Login:** Enterprise-grade single sign-on integration configured via NextAuth providers.
+2. **Microsoft Teams Webhook Notifications:** Dispatches rich Adaptive Cards (v1.4) directly to Teams channels for critical workflow events (e.g., `"Employee submitted goals"`, `"Manager approval pending"`).
+3. **Executive Analytics Dashboard:** Visualizes organization-wide completion percentages, QoQ performance trajectories, and goal distribution across thrust areas.
 
 ---
 
-## Quick Start & Local Development
+## 🛠 Quick Start & Local Development
 
 ### Prerequisites
 * Node.js 20.x+
-* Docker (Optional, for local Postgres/Redis containers)
+* Supabase PostgreSQL instance
 
 ### 1. Installation
 ```bash
@@ -206,11 +185,7 @@ npm install
 ```
 
 ### 2. Environment Configuration
-Create a local environment file:
-```bash
-cp .env.example .env.local
-```
-Ensure the following variables are configured in `.env.local` or `.env`:
+Create a local environment file (`.env`):
 ```env
 DATABASE_URL="postgresql://postgres:postgres@localhost:5432/syncora_db?schema=public"
 NEXTAUTH_SECRET="enterprise-super-secret-key-2026"
@@ -225,11 +200,6 @@ Deploy Prisma migrations and seed the database with baseline enterprise credenti
 npx prisma migrate deploy
 npm run seed
 ```
-**Seed Credentials:**
-* **Admin:** `admin@goal-sync.local` (Role: `ADMIN`)
-* **Manager:** `manager@goal-sync.local` (Role: `MANAGER`)
-* **Employee:** `employee@goal-sync.local` (Role: `EMPLOYEE`)
-*(All passwords default to `password123`)*
 
 ### 4. Running the Application
 Start the Next.js development server:
@@ -240,22 +210,6 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
-## Hackathon Demo & Verification Guide
-
-For hackathon judging reviews, Syncora provides a fully transparent, simulated telemetry inspector. 
-
-1. **Log in as Employee (`employee@goal-sync.local`):**
-   * Navigate to `/dashboard/employee`.
-   * Create a draft goal sheet, verify 100% weightage validation, and click **Submit**.
-2. **Log in as Manager (`manager@goal-sync.local`):**
-   * Navigate to `/dashboard/manager`.
-   * Open the pending goal sheet, perform inline weightage edits, and click **Approve & Lock**.
-3. **Inspect Simulated Telemetry:**
-   * Because external webhook URLs are omitted in demo mode, the Circuit Breaker automatically routes Microsoft Teams Adaptive Cards and email payloads to `globalThis.workflowLogs`.
-   * Check the server console or the in-app Telemetry Inspector to view the beautifully formatted Adaptive Card v1.4 JSON structures and HTML email notifications generated in real time!
-
----
-
-## License
+## 📜 License
 
 Syncora is proprietary enterprise software. All rights reserved.
